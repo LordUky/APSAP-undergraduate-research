@@ -15,10 +15,10 @@ class FirstPage(object):
         Label(self.root, text='N:', anchor='w').place(x=20, y=30, width=20, height=20)
         Combobox(self.root).place(x=40, y=30, width=100, height=20)
 
-        Label(self.root, text='code1:', anchor='w').place(x=20, y=60, width=100, height=20)
+        Label(self.root, text='Easting1:', anchor='w').place(x=20, y=60, width=100, height=20)
         Combobox(self.root).place(x=220, y=60, width=100, height=20)
 
-        Label(self.root, text='code2:', anchor='w').place(x=20, y=90, width=100, height=20)
+        Label(self.root, text='Northing2:', anchor='w').place(x=20, y=90, width=100, height=20)
         Combobox(self.root).place(x=220, y=90, width=100, height=20)
 
         Label(self.root, text='Context Number:', anchor='w').place(x=20, y=120, width=200, height=20)
