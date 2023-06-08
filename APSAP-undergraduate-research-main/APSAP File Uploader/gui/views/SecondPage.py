@@ -2,11 +2,13 @@ import tkinter
 from tkinter import *
 from tkinter import ttk
 from tkinter.messagebox import *
-from FirstPage import *
+from .FirstPage import *
 
 
 class SecondPage(object):
-    def __init__(self, r=None):
+    def __init__(self, pm = None, rp = r"D:\ararat\data\files\N", r=None):
+        self.pm = pm
+        self.rootpath = rp
         self.root = r
         self.createPage()
 
@@ -25,12 +27,12 @@ class SecondPage(object):
 
     def exitNotSaving(self):
         self.clear()
-        FirstPage(self.root)
+        FirstPage(self.pm, self.rootpath, self.root)
 
     def retake(self):
         pass
 
     def nextSide(self):
-        from ThirdPage import ThirdPage
+        from .ThirdPage import ThirdPage
         self.clear()
-        ThirdPage(self.root)
+        ThirdPage(self.pm, self.rootpath, self.root)

@@ -3,7 +3,8 @@ from tkinter.messagebox import *
 
 
 class LoginPage(object):
-    def __init__(self, r=None):
+    def __init__(self, pm = None, r=None):
+        self.pm = pm
         self.root = r  # r: Tk()
         self.root.geometry('%dx%d' % (300, 180))  # 设置窗口大小
         self.username = StringVar()
@@ -19,11 +20,11 @@ class LoginPage(object):
         Button(self.page, text='Quit', command=self.page.quit).grid(row=3, column=1, stick=E)
 
     def loginCheck(self):
-        from FirstPage import FirstPage
+        from .FirstPage import FirstPage
         name = self.username.get()
         secret = self.password.get()
         if name == '' and secret == '':
             self.page.destroy()
-            FirstPage(self.root)
+            FirstPage(self.pm, self.pm.root_path, self.root)
         else:
             showinfo(title='Oops!', message='Identification Failed！')

@@ -4,27 +4,24 @@ import shutil
 
 class photo_manager:
     '''
-    property: 
+    property:
+        _root_path： path of mapped remote (should be mapped to local driver), require initial set up first
+        (following parameters are from scanning/manual input). e.g."D:\\ararat\\data\\files\\N"
         _from_path: path where photos are taken, fixed in this program
-        _local_map_path: path of mapped remote (should be mapped to local driver), require initial set up first
-        (following parameters are from scanning/manual input)
-        _ns: north or south
         _num1: first number
         _num2: second number
         _latitude: which latitude
         _context: context number
     '''
-    def __init__(self, temp_photo_path="", local_map_path="", ns="", num1="", num2="", latitude="", context="", indiv_num="") -> None:
+    def __init__(self, rp=r"D:\ararat\data\files\N", temp_photo_path="", num1="", num2="", latitude="", context="") -> None:
         # restore last working setting
-        # eg.D:\ararat\data\files\N\38\478130\4419430\1\finds\individual\1\photos 
+        # eg.D:\ararat\data\files\N\38\478130\4419430\1\finds\individual\1\photos
+        self._root_path = rp # path of mirrored remote drive
         self._from_path = temp_photo_path # path where the temporary photo is stored
-        self._local_map_path = local_map_path # path of mirrored remote drive
-        self._ns = ns # N or S, optional
+        self._latitude = latitude  # latitude, optional
         self._num1 = num1 # first number, optional
         self._num2 = num2   #second number, optional
-        self._latitude = latitude   #latitude, optional
         self._context = context # context number, optioanl
-        self._indiv_num = indiv_num # individual number, optional
 
         # scan the current folder
         ## -situation: no connection -> prompt for internet checking
@@ -34,11 +31,12 @@ class photo_manager:
 
     # setter and getters for the class attributes
     @property
-    def ns(self):
-        return self._ns
-    @ns.setter
-    def ns(self, ns):
-        self._ns = ns
+    def root_path(self):
+        return self._root_path
+
+    @root_path.setter
+    def root_path(self, rp):
+        self._root_path = rp
 
     @property
     def latitude(self):
@@ -73,14 +71,12 @@ class photo_manager:
     ## generate output path when all class variables are filled 
     def to_path(self):
         # check for completeness
-        if self._local_map_path == "":
+        if self.root_path == "":
             raise NameError("Remote drive path not existing, please check")
-        elif self._ns == "":
-            raise NameError("N or S not selected, please check")
         elif self._num1 == "":
-            raise NameError("First number not existing, please check")
+            raise NameError("code1 not existing, please check")
         elif self._num2 == "":
-            raise NameError("Second number not existing, please check")
+            raise NameError("code2 number not existing, please check")
         elif self._latitude == "":
             raise NameError("Latitude not existing, please check")
         elif self._context == "":
@@ -88,7 +84,7 @@ class photo_manager:
         elif self._indiv_num == "":
             raise NameError("Individual folder not existing, please check")
         else: # full path of remote link
-            return f"{self._local_map_path}\\{self._ns}\\{self._latitude}\\{self._num1}\\{self._num2}\\{self._context}\\finds\\individual\\{self._indiv_num}\\photos"
+            return f"{self.root_path}\\{self._latitude}\\{self._num1}\\{self._num2}\\{self._context}\\finds\\individual"
 
     ## move all photos from temp file to destination
     def copy_and_paste_photo(self):
@@ -98,11 +94,11 @@ class photo_manager:
 
     # *general functions*
     ## create new folder in remote drive
-    def create_context(self,context_name):
-        new_path = f"{self._local_map_path}\\{self._ns}\\{self._latitude}\\{self._num1}\\{self._num2}\\{context_name}\\finds\\individual\\1\\photos"
+    def create_context(self, context_number):
+        new_path = f"{self.root_path}\\{self._latitude}\\{self._num1}\\{self._num2}\\{context_number}\\finds\\individual"
         # examine if the path already exists
         if os.path.exists(new_path):
-            return "Path already exist"
+            return "Path already exist!!"
         try:
             os.makedirs(new_path)
             return "new context is created successfully"
@@ -110,7 +106,7 @@ class photo_manager:
             return "new context cannot be created, please retry"
         
     ## sub directories finder
-    def find_sub_dir(path):
+    def find_sub_dir(self, path):
         '''This function returns a list of sub directories given a full path
             This can be used in pull up selection in GUI view
         '''
@@ -118,7 +114,7 @@ class photo_manager:
         return directories
     
     ## folder cleaner
-    def clear_folder(workpath:str, num:int):
+    def clear_folder(self, workpath:str, num:int):
         '''
         description: delete everything in path inputed
         '''
@@ -126,7 +122,7 @@ class photo_manager:
             if file.name == str(num):
                 os.remove(os.path.join(workpath,file))
     # 
-    def get_name_list(work_path:str):
+    def get_name_list(self, work_path:str):
         '''
         A function used in sort_folder: return new file list (folder name converted to int)
         '''
@@ -137,7 +133,7 @@ class photo_manager:
         return name_list
 
     # 
-    def sort_folder(self,work_path:str)-> bool:
+    def sort_folder(self, work_path:str)-> bool:
         '''
         Description: this function detects missing folders and sort them
         '''
@@ -159,7 +155,7 @@ class photo_manager:
             return True
             
     ## file mover
-    def copy_and_paste(self,from_path:str, to_path:str, remove:bool=False, photo_format:str = ".jpg"):
+    def copy_and_paste(self,  from_path:str, to_path:str, remove:bool=False, photo_format:str = ".jpg"):
         '''
         input: 
             from_path: working folder path, should have a default value
@@ -224,7 +220,7 @@ if __name__ == "__main__":
     ns = "N" # to do
     latitude = "38" #~
     context = "1" #~
-    to_path = f"D:\\ararat\\files\\{ns}\\{latitude}\\478130\\4419430\\{context}\\finds\\individual"
+    to_path = f"D:\\ararat\\files\\N\\{latitude}\\478130\\4419430\\{context}\\finds\\individual"
 
     
 
