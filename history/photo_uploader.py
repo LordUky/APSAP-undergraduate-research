@@ -42,5 +42,5 @@ class photo_uploader:
 
 
 if __name__ == "__main__":
-    workpath = "D:\\test\\working_temp"
+    workpath = "D:/test/working_temp"
     uploader = photo_uploader(workpath,"autophoto","Armenia1")
