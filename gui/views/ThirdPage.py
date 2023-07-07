@@ -86,8 +86,10 @@ class ThirdPage(object):
         dir_list = self.pm.find_sub_dir(
             f"{self.pm.root_path}/{self.pm._latitude}/{self.pm._num1}/{self.pm._num2}/{self.pm.context}/finds/individual/")
 
-        fp = f"{self.pm.root_path}/{self.pm._latitude}/{self.pm._num1}/{self.pm._num2}/{self.pm.context}/finds/individual/" + str(
-            max([int(x) for x in dir_list])) + "/photos/2.jpg"
+        fp_parent = f"{self.pm.root_path}/{self.pm._latitude}/{self.pm._num1}/{self.pm._num2}/{self.pm.context}/finds/individual/" + str(
+            max([int(x) for x in dir_list]))
+        fp = fp_parent + "/photos/2.jpg"
+
         print(fp)
 
         while True:
@@ -99,4 +101,4 @@ class ThirdPage(object):
                 print("Please check connection and focus and try again.")
                 input("Press Enter after fixing error")
 
-        FourthPage(self.asts, self.rootpath, self.root)
+        FourthPage(fp_parent, asts=self.asts, rp=self.rootpath, r=self.root)

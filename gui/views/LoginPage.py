@@ -29,5 +29,3 @@ class LoginPage(object):
             FirstPage(self.asts, self.pm.root_path, self.root)
         else:
             showinfo(title='Oops!', message='Identification Failed!')
-
-        print("a")
