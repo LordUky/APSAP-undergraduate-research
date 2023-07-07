@@ -62,7 +62,7 @@ class SecondPage(object):
         self.clear()
 
         if os.path.exists(
-                f"{self.pm.root_path}/{self.pm._latitude}/{self.pm._num1}/{self.pm._num2}/{self.pm.context}/finds/individual/1"
+                f"{self.pm.root_path}/{self.pm._latitude}/{self.pm._num1}/{self.pm._num2}/{self.pm.context}/finds/individual/1/photos"
         ):
             # new_dir = f"{self.pm.root_path}/{self.pm._latitude}/{self.pm._num1}/{self.pm._num2}/{self.pm.context}/finds/individual/" + str(int(self.pm.find_sub_dir(f"{self.pm.root_path}/{self.pm._latitude}/{self.pm._num1}/{self.pm._num2}/{self.pm.context}/finds/individual/")[-1])+1)
             dir_list = self.pm.find_sub_dir(
@@ -71,18 +71,18 @@ class SecondPage(object):
                     f"{self.pm.root_path}/{self.pm._latitude}/{self.pm._num1}/{self.pm._num2}/{self.pm.context}/finds/individual/" + str(
                             max([int(x) for x in dir_list])) + "/photos/2.jpg"):
                 new_dir = f"{self.pm.root_path}/{self.pm._latitude}/{self.pm._num1}/{self.pm._num2}/{self.pm.context}/finds/individual/" + str(
-                    max([int(x) for x in dir_list]) + 1)
+                    max([int(x) for x in dir_list]) + 1) + "/photos"
                 os.makedirs(new_dir)
             else:
                 new_dir = f"{self.pm.root_path}/{self.pm._latitude}/{self.pm._num1}/{self.pm._num2}/{self.pm.context}/finds/individual/" + str(
-                    max([int(x) for x in dir_list]))
+                    max([int(x) for x in dir_list])) + "/photos"
 
-            print("new dir:", new_dir)
+            print("2nd page new dir:", new_dir)
 
         else:
-            new_dir = f"{self.pm.root_path}/{self.pm._latitude}/{self.pm._num1}/{self.pm._num2}/{self.pm.context}/finds/individual/1"
+            new_dir = f"{self.pm.root_path}/{self.pm._latitude}/{self.pm._num1}/{self.pm._num2}/{self.pm.context}/finds/individual/1/photos"
             os.makedirs(new_dir)
-
-        self.cc.capture_image_and_download(new_dir + "photos/1.jpg")
+        
+        self.cc.capture_image_and_download(new_dir + "/1.jpg")
 
         ThirdPage(self.asts, self.rootpath, self.root)
