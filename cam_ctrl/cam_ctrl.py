@@ -22,7 +22,9 @@ class cameraControl:
 
     def capture_image_and_download(self, fp):
         if self._DEBUG:
-            os.system("cp cam_ctrl/aaa.jpg {}".format(fp))
+            _cmd = "cp cam_ctrl/aaa.jpg {}".format(fp)
+            print("CP COMMAND:", _cmd)
+            os.system(_cmd)
             return
         # @TODO capture and download format according to ext. name in fp
         ext_name = fp[-3 : ].lower()
