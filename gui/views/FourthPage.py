@@ -4,6 +4,7 @@ from tkinter import ttk
 from tkinter.messagebox import *
 from .FirstPage import *
 from PIL import ImageTk
+import pandas as pd
 import logging
 
 
@@ -25,7 +26,19 @@ class FourthPage(object):
             w.place_forget()
 
     def sample(self):
-        pass
+        self.asts.scaleReader.initialize()
+        weight = self.asts.scaleReader.read()
+        self.asts.scaleReader.destroy()
+
+        df = pd.DataFrame([weight])
+        dir_list = self.pm.find_sub_dir(
+            f"{self.pm.root_path}/{self.pm._latitude}/{self.pm._num1}/{self.pm._num2}/{self.pm.context}/finds/individual/")
+
+        path = f"{self.pm.root_path}/{self.pm._latitude}/{self.pm._num1}/{self.pm._num2}/{self.pm.context}/finds/individual/" + str(
+            max([int(x) for x in dir_list]))
+
+        df.to_excel(path + "/a.xlsx", sheet_name='sheet1', index=False, header=False)
+
         self.clear()
         FirstPage(self.asts, self.rootpath, self.root)
 
