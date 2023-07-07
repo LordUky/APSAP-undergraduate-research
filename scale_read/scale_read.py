@@ -34,3 +34,8 @@ class scaleRead:
 
     def __del__(self):
         self.ser.close()
+
+if __name__ == "__main__":
+    sr = scaleRead("COM10")
+    weight = sr.read()
+    print(weight)

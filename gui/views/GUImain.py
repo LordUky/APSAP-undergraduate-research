@@ -8,3 +8,5 @@ class GUImain():
         root.title('APSAP')
         LoginPage(asts, root)
         root.mainloop()
+        print("ML END")
+        del(self.asts.sr)
