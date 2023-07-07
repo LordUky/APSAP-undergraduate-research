@@ -3,11 +3,12 @@ from tkinter import *
 from tkinter import ttk
 from tkinter.messagebox import *
 from .FirstPage import *
-from PIL import ImageTk # ImageTk needs to be installed separately
+from PIL import ImageTk  # ImageTk needs to be installed separately
 from cam_ctrl import cam_ctrl
 
+
 class SecondPage(object):
-    def __init__(self, asts, rp = r"D:/ararat/data/files/N", r=None):
+    def __init__(self, asts, rp=r"D:/ararat/data/files/N", r=None):
         self.pm = asts.pm
         self.asts = asts
         self.cc = asts.cc
@@ -15,6 +16,7 @@ class SecondPage(object):
         self.root = r
 
         self.createPage()
+
         cpf = self.cc.capture_preview()
         print("cpf", cpf)
         if cpf:
@@ -23,7 +25,6 @@ class SecondPage(object):
             self.previewLabel["image"] = tkim
         else:
             print("[ERROR]\tcapture preview fail")
-
 
     def createPage(self):
         Button(self.root, text='Retake', command=self.retake).place(x=60, y=100, width=200, height=40)
@@ -59,23 +60,29 @@ class SecondPage(object):
     def nextSide(self):
         from .ThirdPage import ThirdPage
         self.clear()
+
         if os.path.exists(
-            f"{self.pm.root_path}/{self.pm._latitude}/{self.pm._num1}/{self.pm._num2}/{self.pm.context}/finds/individual/1"
+                f"{self.pm.root_path}/{self.pm._latitude}/{self.pm._num1}/{self.pm._num2}/{self.pm.context}/finds/individual/1"
         ):
-            # new_dir = f"{self.pm.root_path}/{self.pm._latitude}/{self.pm._num1}/{self.pm._num2}/{self.pm.context}/finds/individual/" + str(int(self.pm.find_sub_dir(f"{self.pm.root_path}/{self.pm._latitude}/{self.pm._num1}/{self.pm._num2}/{self.pm.context}/finds/individual/")[-1])+1) 
-            dir_list = self.pm.find_sub_dir(f"{self.pm.root_path}/{self.pm._latitude}/{self.pm._num1}/{self.pm._num2}/{self.pm.context}/finds/individual/")
-            if os.path.exists(f"{self.pm.root_path}/{self.pm._latitude}/{self.pm._num1}/{self.pm._num2}/{self.pm.context}/finds/individual/" + str(max([int(x) for x in dir_list]))+"/2.jpg"):
-                new_dir = f"{self.pm.root_path}/{self.pm._latitude}/{self.pm._num1}/{self.pm._num2}/{self.pm.context}/finds/individual/" + str(max([int(x) for x in dir_list])+1)
+            # new_dir = f"{self.pm.root_path}/{self.pm._latitude}/{self.pm._num1}/{self.pm._num2}/{self.pm.context}/finds/individual/" + str(int(self.pm.find_sub_dir(f"{self.pm.root_path}/{self.pm._latitude}/{self.pm._num1}/{self.pm._num2}/{self.pm.context}/finds/individual/")[-1])+1)
+            dir_list = self.pm.find_sub_dir(
+                f"{self.pm.root_path}/{self.pm._latitude}/{self.pm._num1}/{self.pm._num2}/{self.pm.context}/finds/individual/")
+            if os.path.exists(
+                    f"{self.pm.root_path}/{self.pm._latitude}/{self.pm._num1}/{self.pm._num2}/{self.pm.context}/finds/individual/" + str(
+                            max([int(x) for x in dir_list])) + "/photos/2.jpg"):
+                new_dir = f"{self.pm.root_path}/{self.pm._latitude}/{self.pm._num1}/{self.pm._num2}/{self.pm.context}/finds/individual/" + str(
+                    max([int(x) for x in dir_list]) + 1)
                 os.makedirs(new_dir)
             else:
-                new_dir = f"{self.pm.root_path}/{self.pm._latitude}/{self.pm._num1}/{self.pm._num2}/{self.pm.context}/finds/individual/" + str(max([int(x) for x in dir_list]))
+                new_dir = f"{self.pm.root_path}/{self.pm._latitude}/{self.pm._num1}/{self.pm._num2}/{self.pm.context}/finds/individual/" + str(
+                    max([int(x) for x in dir_list]))
 
             print("new dir:", new_dir)
 
         else:
             new_dir = f"{self.pm.root_path}/{self.pm._latitude}/{self.pm._num1}/{self.pm._num2}/{self.pm.context}/finds/individual/1"
             os.makedirs(new_dir)
-       
-        self.cc.capture_image_and_download(new_dir + "/1.jpg")
+
+        self.cc.capture_image_and_download(new_dir + "photos/1.jpg")
 
         ThirdPage(self.asts, self.rootpath, self.root)

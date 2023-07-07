@@ -3,7 +3,7 @@ from tkinter.messagebox import *
 
 
 class LoginPage(object):
-    def __init__(self, asts = None, r=None):
+    def __init__(self, asts=None, r=None):
         self.asts = asts
         self.pm = self.asts.pm
         self.root = r  # r: Tk()

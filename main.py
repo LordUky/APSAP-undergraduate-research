@@ -1,9 +1,10 @@
 import gui
 from cam_ctrl import cam_ctrl
 
+
 class assistants():
     def __init__(self) -> None:
-        self.pm = gui.models.photo_manager(r"/home/apsap_dev/Documents/APSAP-undergraduate-research/photo_folder/N")
+        self.pm = gui.models.photo_manager(r"C:\Users\User\OneDrive - connect.hku.hk\桌面\N")
         self.cc = cam_ctrl.cameraControl(tmp_dir="tmp/")
 
 

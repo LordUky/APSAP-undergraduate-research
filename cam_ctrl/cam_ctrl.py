@@ -1,7 +1,7 @@
 import os
 
 class cameraControl:
-    _DEBUG = False
+    _DEBUG = True
     def __init__(self, tmp_dir = "/tmp/") -> None:
         # assume tmp_fp is empty
         self.tmp_dir = tmp_dir
