@@ -97,5 +97,6 @@ class ThirdPage(object):
             else:
                 print("Error {}".format(cc_ret))
                 print("Please check connection and focus and try again.")
+                input("Press Enter after fixing error")
 
         FourthPage(self.asts, self.rootpath, self.root)
