@@ -89,6 +89,13 @@ class ThirdPage(object):
         fp = f"{self.pm.root_path}/{self.pm._latitude}/{self.pm._num1}/{self.pm._num2}/{self.pm.context}/finds/individual/" + str(
             max([int(x) for x in dir_list])) + "/photos/2.jpg"
         print(fp)
-        self.cc.capture_image_and_download(fp)
+
+        while True:
+            cc_ret = self.cc.capture_image_and_download(fp)
+            if (cc_ret == 0):
+                break
+            else:
+                print("Error {}".format(cc_ret))
+                print("Please check connection and focus and try again.")
 
         FourthPage(self.asts, self.rootpath, self.root)
