@@ -82,7 +82,7 @@ class SecondPage(object):
         else:
             new_dir = f"{self.pm.root_path}/{self.pm._latitude}/{self.pm._num1}/{self.pm._num2}/{self.pm.context}/finds/individual/1/photos"
             os.makedirs(new_dir)
-        
+
         self.cc.capture_image_and_download(new_dir + "/1.jpg")
 
         ThirdPage(self.asts, self.rootpath, self.root)
