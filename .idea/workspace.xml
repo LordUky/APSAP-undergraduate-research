@@ -4,7 +4,17 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="8c8e226e-1aba-40fb-8616-283e480e391e" name="Changes" comment="GUI link with scaleReader" />
+    <list default="true" id="8c8e226e-1aba-40fb-8616-283e480e391e" name="Changes" comment="GUI link with scaleReader">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gui/views/FirstPage.py" beforeDir="false" afterPath="$PROJECT_DIR$/gui/views/FirstPage.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gui/views/FourthPage.py" beforeDir="false" afterPath="$PROJECT_DIR$/gui/views/FourthPage.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gui/views/GUImain.py" beforeDir="false" afterPath="$PROJECT_DIR$/gui/views/GUImain.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gui/views/LoginPage.py" beforeDir="false" afterPath="$PROJECT_DIR$/gui/views/LoginPage.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gui/views/SecondPage.py" beforeDir="false" afterPath="$PROJECT_DIR$/gui/views/SecondPage.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gui/views/ThirdPage.py" beforeDir="false" afterPath="$PROJECT_DIR$/gui/views/ThirdPage.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/scale_read/scale_read.py" beforeDir="false" afterPath="$PROJECT_DIR$/scale_read/scale_read.py" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -24,6 +34,7 @@
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
     "RunOnceActivity.ShowReadmeOnStart": "true",
+    "ToolWindowRun.ShowToolbar": "false",
     "WebServerToolWindowFactoryState": "false",
     "git-widget-placeholder": "main",
     "last_opened_file_path": "C:/Users/User/PycharmProjects/APSAP-undergraduate-research",
@@ -31,7 +42,7 @@
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
-    "settings.editor.selected.configurable": "project.propVCSSupport.DirectoryMappings",
+    "settings.editor.selected.configurable": "com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
@@ -43,8 +54,8 @@
       <envs>
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
-      <option name="SDK_HOME" value="C:\Users\User\APSAP-undregraduate-research\Scripts\python.exe" />
-      <option name="SDK_NAME" value="Python 3.8 (APSAP-undregraduate-research)" />
+      <option name="SDK_HOME" value="C:\Users\User\APSAP-undergraduate-research\Scripts\python.exe" />
+      <option name="SDK_NAME" value="Python 3.8 (venv)" />
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
       <option name="IS_MODULE_SDK" value="false" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
@@ -69,7 +80,8 @@
       <option name="presentableId" value="Default" />
       <updated>1688708163833</updated>
       <workItem from="1688708164948" duration="553000" />
-      <workItem from="1688709020180" duration="1394000" />
+      <workItem from="1688709020180" duration="3462000" />
+      <workItem from="1688943971078" duration="6997000" />
     </task>
     <task id="LOCAL-00001" summary="GUI link with scaleReader">
       <created>1688709347263</created>
@@ -85,7 +97,14 @@
       <option name="project" value="LOCAL" />
       <updated>1688709520095</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="GUI link with scaleReader">
+      <created>1688710450184</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1688710450184</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -107,6 +126,6 @@
     <option name="LAST_COMMIT_MESSAGE" value="GUI link with scaleReader" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/APSAP_undergraduate_research$main.coverage" NAME="main Coverage Results" MODIFIED="1688708294763" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/APSAP_undergraduate_research$main.coverage" NAME="main Coverage Results" MODIFIED="1688951278202" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
 </project>

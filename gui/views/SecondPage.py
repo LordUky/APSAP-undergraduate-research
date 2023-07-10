@@ -11,6 +11,7 @@ class SecondPage(object):
     def __init__(self, asts, rp=r"D:/ararat/data/files/N", r=None):
         self.pm = asts.pm
         self.asts = asts
+        self.asts.cp = 2
         self.cc = asts.cc
         self.rootpath = rp
         self.root = r

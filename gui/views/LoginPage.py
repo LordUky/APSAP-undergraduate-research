@@ -5,6 +5,7 @@ from tkinter.messagebox import *
 class LoginPage(object):
     def __init__(self, asts=None, r=None):
         self.asts = asts
+        self.asts.cp = 0
         self.pm = self.asts.pm
         self.root = r  # r: Tk()
         self.root.geometry('%dx%d' % (300, 180))  # 设置窗口大小

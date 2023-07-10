@@ -13,6 +13,7 @@ class FirstPage(object):
         self.combo1 = None
         self.pm = asts.pm
         self.asts = asts
+        self.asts.cp = 1
         self.rootpath = rp
 
         self.root = r  # r: Tk()
@@ -53,9 +54,8 @@ class FirstPage(object):
         self.combo4.place(x=220, y=120, width=100, height=20)
         self.combo4.bind('<<ComboboxSelected>>', self.comcmd4)
 
-        Button(self.root, text='Take New Picture', command=self.TakeNewPicture).place(x=20, y=180, width=200, height=20)
-
-        Button(self.root, text='New Context', command=self.NewContext).place(x=20, y=210, width=200, height=20)
+        self.newPicButton = Button(self.root, text='Take New Picture', command=self.TakeNewPicture, state='disabled')
+        self.newPicButton.place(x=20, y=180, width=200, height=20)
 
         Button(self.root, text='Log Out', command=self.LogOut).place(x=500, y=20, width=80, height=20)
 
@@ -88,14 +88,16 @@ class FirstPage(object):
 
     def comcmd4(self, a=None):
         if self.combovar4.get() == '':
+            self.newPicButton['state'] = 'disabled'
             return
         if self.combovar4.get() == 'create new':
+            self.newPicButton['state'] = 'disabled'
             askback = askyesno('confirm', 'create new context??')
             if askback:
-                if not self.asts.GUITestOnly:
-                    self.NewContext()
+                self.NewContext()
             return
         self.pm.context = self.combovar4.get()
+        self.newPicButton['state'] = 'active'
         return
 
     def clear(self):

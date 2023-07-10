@@ -12,6 +12,7 @@ class ThirdPage(object):
     def __init__(self, asts=None, rp=r"D:/ararat/data/files/N", r=None):
         self.pm = asts.pm
         self.asts = asts
+        self.asts.cp = 3
         self.cc = asts.cc
         self.rootpath = rp
         self.root = r

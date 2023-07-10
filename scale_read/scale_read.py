@@ -2,16 +2,18 @@ import serial
 import re
 import openpyxl as pyxl
 import datetime
+import time
 
 class scaleRead:
-    _DEBUG = False
+    _DEBUG = True
 
     def __init__(self, serial_port) -> None:
-        self.ser = serial.Serial(serial_port, 9600)
+        if not self._DEBUG:
+            self.ser = serial.Serial(serial_port, 9600)
 
     def read(self) -> float:
         if self._DEBUG:
-            return 114.514
+            return round(time.time(), 2)
         else:
             response = str(self.ser.read(10))
             response = float(re.findall(r'\d+\.\d+', response)[0])
@@ -33,7 +35,8 @@ class scaleRead:
         wb.save(fp)
 
     def __del__(self):
-        self.ser.close()
+        if not self._DEBUG:
+            self.ser.close()
 
 if __name__ == "__main__":
     sr = scaleRead("COM10")

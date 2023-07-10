@@ -11,6 +11,7 @@ class FourthPage(object):
     def __init__(self, fp_parent, asts=None, rp=r"D:/ararat/data/files/N", r=None):
         self.pm = asts.pm
         self.asts = asts
+        self.asts.cp = 4
         self.cc = asts.cc
         self.sr = asts.sr
         self.rootpath = rp
@@ -20,12 +21,16 @@ class FourthPage(object):
 
         self.createPage()
 
+        print(self.root.winfo_children())
+
     def createPage(self):
         Button(self.root, text='Sample', command=self.sample).place(x=60, y=200, width=200, height=40)
+        Label(self.root, text='', name="weightLabel", bg='black', fg="white").place(x=300, y=200, width=200, height=40)
 
     def clear(self):
         for w in self.root.winfo_children():
             w.place_forget()
+
 
     def sample(self):
         weight = self.sr.read()
