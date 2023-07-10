@@ -156,7 +156,7 @@ class photo_manager:
             return True
             
     ## file mover
-    def copy_and_paste(self,  from_path:str, to_path:str, remove:bool=False, photo_format:str = ".jpg"):
+    def copy_and_paste(self,  from_path:str, to_path:str, remove:bool=False, photo_format:str = ".cr3"):
         '''
         input: 
             from_path: working folder path, should have a default value

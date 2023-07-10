@@ -1,7 +1,7 @@
 import os
 
 class cameraControl:
-    _DEBUG = True
+    _DEBUG = False
     def __init__(self, tmp_dir = "/tmp/") -> None:
         # assume tmp_fp is empty
         self.tmp_dir = tmp_dir
@@ -25,15 +25,10 @@ class cameraControl:
             _cmd = "cp cam_ctrl/aaa.jpg {}".format(fp)
             print("CP COMMAND:", _cmd)
             os.system(_cmd)
-            return
-        # @TODO capture and download format according to ext. name in fp
-        ext_name = fp[-3 : ].lower()
+            return None
         ret = None
-        if (ext_name == 'jpg'):
-            ret = os.system("gphoto2 --capture-image-and-download --filename={} --force-overwrite".format(fp))
-        elif (ext_name == 'cr2'):
-            # capture and download RAW
-            pass
+
+        ret = os.system("gphoto2 --capture-image-and-download --filename={} --force-overwrite".format(fp))
         return ret
     
 if __name__ == "__main__":

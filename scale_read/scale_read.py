@@ -5,7 +5,7 @@ import datetime
 import time
 
 class scaleRead:
-    _DEBUG = True
+    _DEBUG = False
 
     def __init__(self, serial_port) -> None:
         if not self._DEBUG:

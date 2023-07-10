@@ -70,7 +70,7 @@ class SecondPage(object):
                 f"{self.pm.root_path}/{self.pm._latitude}/{self.pm._num1}/{self.pm._num2}/{self.pm.context}/finds/individual/")
             if os.path.exists(
                     f"{self.pm.root_path}/{self.pm._latitude}/{self.pm._num1}/{self.pm._num2}/{self.pm.context}/finds/individual/" + str(
-                            max([int(x) for x in dir_list])) + "/photos/2.jpg"):
+                            max([int(x) for x in dir_list])) + "/photos/2.cr3"):
                 new_dir = f"{self.pm.root_path}/{self.pm._latitude}/{self.pm._num1}/{self.pm._num2}/{self.pm.context}/finds/individual/" + str(
                     max([int(x) for x in dir_list]) + 1) + "/photos"
                 os.makedirs(new_dir)
@@ -85,7 +85,7 @@ class SecondPage(object):
             os.makedirs(new_dir)
 
         while True:
-            cc_ret = self.cc.capture_image_and_download(new_dir + "/1.jpg")
+            cc_ret = self.cc.capture_image_and_download(new_dir + "/1.cr3")
             if (cc_ret == None):
                 break
             else:
