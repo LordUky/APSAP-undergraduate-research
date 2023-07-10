@@ -110,8 +110,11 @@ class FirstPage(object):
         SecondPage(self.asts, self.rootpath, self.root)
 
     def NewContext(self):
-        self.pm.create_context(
-            int(self.pm.find_sub_dir(f"{self.pm.root_path}/{self.pm.latitude}/{self.pm.num1}/{self.pm.num2}")[-1]) + 1)
+        if len(self.pm.find_sub_dir(f"{self.pm.root_path}/{self.pm.latitude}/{self.pm.num1}/{self.pm.num2}")) == 0:
+            self.pm.create_context(1)
+        else:
+            self.pm.create_context(
+                int(self.pm.find_sub_dir(f"{self.pm.root_path}/{self.pm.latitude}/{self.pm.num1}/{self.pm.num2}")[-1]) + 1)
         self.combo4['values'] = ['create new'] + self.pm.find_sub_dir(
             f"{self.pm.root_path}/{self.pm.latitude}/{self.pm.num1}/{self.pm.num2}")
 
