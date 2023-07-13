@@ -25,9 +25,7 @@ class cameraControl:
             _cmd = "cp cam_ctrl/aaa.jpg {}".format(fp)
             print("CP COMMAND:", _cmd)
             os.system(_cmd)
-            return None
-        ret = None
-
+            return 0
         ret = os.system("gphoto2 --capture-image-and-download --filename={} --force-overwrite".format(fp))
         return ret
     

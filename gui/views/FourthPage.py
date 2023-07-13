@@ -11,13 +11,13 @@ class FourthPage(object):
     def __init__(self, fp_parent, asts=None, rp=r"D:/ararat/data/files/N", r=None):
         self.pm = asts.pm
         self.asts = asts
-        self.asts.cp = 4
         self.cc = asts.cc
         self.sr = asts.sr
+        self.sr.start()
         self.rootpath = rp
         self.root = r
-
         self.fp_parent = fp_parent
+        self.asts.cp = 4
 
         self.createPage()
 
@@ -37,5 +37,6 @@ class FourthPage(object):
         self.sr.write_to_file(weight, self.fp_parent + "/a.xlsx")
 
         self.clear()
+        self.sr.stop()
         FirstPage(self.asts, self.rootpath, self.root)
 

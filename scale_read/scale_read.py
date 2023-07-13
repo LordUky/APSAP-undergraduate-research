@@ -3,22 +3,34 @@ import re
 import openpyxl as pyxl
 import datetime
 import time
+import threading
 
 class scaleRead:
     _DEBUG = False
+    running = False
+    weight = -1
 
     def __init__(self, serial_port) -> None:
         if not self._DEBUG:
-            self.ser = serial.Serial(serial_port, 9600)
+            self.ser = serial.Serial(serial_port, 9600, timeout=1)
+
+    def start(self):
+        if not self._DEBUG:
+            t = threading.Thread(target=self._reading_thread)
+            self.running = True
+            t.start()
+
+    def _reading_thread(self):
+        while self.running:
+            # print("rt", self.running)
+            response = str(self.ser.read_until(b"\n\r\n\n\n"))
+            self.weight = float(re.findall(r'\d+\.\d+', response)[0])
 
     def read(self) -> float:
         if self._DEBUG:
             return round(time.time(), 2)
         else:
-            response = str(self.ser.read(10))
-            response = float(re.findall(r'\d+\.\d+', response)[0])
-            print("scale read:", response)
-            return response
+            return self.weight
 
     def write_to_file(self, weight: float, fp: str) -> None:
         wb = pyxl.Workbook()
@@ -34,11 +46,24 @@ class scaleRead:
         ws['D2'] = "g"
         wb.save(fp)
 
+    def stop(self):
+        self.running = False
+        time.sleep(1)
+
     def __del__(self):
+        print("DEL")
         if not self._DEBUG:
             self.ser.close()
 
 if __name__ == "__main__":
-    sr = scaleRead("COM10")
-    weight = sr.read()
-    print(weight)
+    sr = scaleRead("COM11")
+    sr.start()
+
+    for i in range(10):
+        weight = sr.read()
+        print(weight)
+        time.sleep(0.514)
+    
+    sr.stop()
+    print("_DEL")
+    del sr

@@ -86,7 +86,7 @@ class SecondPage(object):
 
         while True:
             cc_ret = self.cc.capture_image_and_download(new_dir + "/1.cr3")
-            if (cc_ret == None):
+            if (cc_ret == 0):
                 break
             else:
                 print("Error {}".format(cc_ret))
