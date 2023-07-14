@@ -8,7 +8,7 @@ class assistants():
         self.pm = gui.models.photo_manager(r"photo_folder/N")
         self.cc = cam_ctrl.cameraControl(tmp_dir="tmp/")
         com_port = sys.argv[1]
-        self.sr = scale_read.scaleRead(com_port)
+        self.sr = scale_read.scaleRead(com_port, debug = (com_port == "x"))
         self.cp = 0 # current page. 0:login; 1:firstPage; ......
 
 gui.views.GUImain.GUImain(assistants())

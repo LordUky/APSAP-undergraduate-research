@@ -18,18 +18,35 @@ class cameraControl:
 
     def get_lv_frame(self):
         out_list = []
+        # wait for starting bytes FF D8
         while True:
             out = self.lv_process.stdout.readline()
-            out_list.append(out)
-            if b"\xff\xd9" in out:
+            idx = out.find(b"\xff\xd8")
+            if (idx != -1):
+                out_list.append(out[idx : ])
                 break
+
+        # wait for starting bytes FF D9
+        while True:
+            out = self.lv_process.stdout.readline()
+            idx = out.find(b"\xff\xd9")
+            if (idx == -1):
+                out_list.append(out)
+            else:
+                out_list.append(out[ : idx + 2])
+                break
+
         out = b"".join(out_list)
         if platform.system() == "Windows":
             out = out.replace(b"\x0d\x0a", b"\x0a")
+        print("\n=====\n")
+        print(out)
         return Image.open(io.BytesIO(out))
     
     def stop_lv(self):
-        self.lv_process.kill()
+        if (self.lv_process != None):
+            self.lv_process.kill()
+        self.lv_process = None
 
     def capture_preview(self) -> str:
         """
@@ -54,11 +71,18 @@ class cameraControl:
         return ret
     
 if __name__ == "__main__":
-    from time import time
-    cc = cameraControl("tmp/")
-    
-    t0 = time()
-    for i in range(10):
-        cc.capture_preview()
-    t1 = time()
-    print((t1 - t0) / 10)
+    cc = cameraControl()
+    cc.start_lv()
+
+    import time
+    try:
+        for i in range(10):
+            img = cc.get_lv_frame()
+            # print(img)
+            img.show()
+            time.sleep(0.5)
+    except Exception as e:
+        print(e)
+        exit()
+    finally:
+        cc.stop_lv()

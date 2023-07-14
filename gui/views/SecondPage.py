@@ -5,6 +5,7 @@ from tkinter.messagebox import *
 from .FirstPage import *
 from PIL import ImageTk  # ImageTk needs to be installed separately
 from cam_ctrl import cam_ctrl
+import time
 
 
 class SecondPage(object):
@@ -18,14 +19,17 @@ class SecondPage(object):
 
         self.createPage()
 
-        cpf = self.cc.capture_preview()
-        print("cpf", cpf)
-        if cpf:
-            tkim = ImageTk.PhotoImage(file=cpf)
-            self.previewLabel.image = tkim
-            self.previewLabel["image"] = tkim
-        else:
-            print("[ERROR]\tcapture preview fail")
+
+        # cpf = self.cc.capture_preview()
+        # print("cpf", cpf)
+        # if cpf:
+        #     tkim = ImageTk.PhotoImage(file=cpf)
+        #     self.previewLabel.image = tkim
+        #     self.previewLabel["image"] = tkim
+        # else:
+        #     print("[ERROR]\tcapture preview fail")
+        self.cc.start_lv()
+        self.asts.cp = 2
 
     def createPage(self):
         Button(self.root, text='Retake', command=self.retake).place(x=60, y=100, width=200, height=40)
@@ -34,7 +38,7 @@ class SecondPage(object):
 
         Label(self.root, text='Preview').place(x=500, y=30, width=480, height=360)
 
-        self.previewLabel = Label(self.root, text='Preview')
+        self.previewLabel = Label(self.root, name="preview_label", text='Preview')
         self.previewLabel.place(x=500, y=90, width=480, height=360)
 
         Button(self.root, text='Next Side', command=self.nextSide).place(x=600, y=500, width=200, height=40)
@@ -59,6 +63,11 @@ class SecondPage(object):
             print("retake cap prev fail")
 
     def nextSide(self):
+        self.asts.cp = -1
+        self.cc.stop_lv()
+
+        time.sleep(1)
+
         from .ThirdPage import ThirdPage
         self.clear()
 

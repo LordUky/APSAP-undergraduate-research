@@ -10,7 +10,8 @@ class scaleRead:
     running = False
     weight = -1
 
-    def __init__(self, serial_port) -> None:
+    def __init__(self, serial_port, debug = False) -> None:
+        self._DEBUG = debug
         if not self._DEBUG:
             self.ser = serial.Serial(serial_port, 9600, timeout=1)
 

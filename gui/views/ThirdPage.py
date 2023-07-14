@@ -12,19 +12,21 @@ class ThirdPage(object):
     def __init__(self, asts=None, rp=r"D:/ararat/data/files/N", r=None):
         self.pm = asts.pm
         self.asts = asts
-        self.asts.cp = 3
         self.cc = asts.cc
         self.rootpath = rp
         self.root = r
 
         self.createPage()
 
-        cpf = self.cc.capture_preview()
-        logging.debug("cpf", cpf)
-        if cpf:
-            tkim = ImageTk.PhotoImage(file=cpf)
-            self.previewLabel.image = tkim
-            self.previewLabel["image"] = tkim
+        self.cc.start_lv()
+        self.asts.cp = 3
+
+        # cpf = self.cc.capture_preview()
+        # logging.debug("cpf", cpf)
+        # if cpf:
+        #     tkim = ImageTk.PhotoImage(file=cpf)
+        #     self.previewLabel.image = tkim
+        #     self.previewLabel["image"] = tkim
 
     def createPage(self):
         Button(self.root, text='Retake', command=self.retake).place(x=60, y=100, width=200, height=40)
@@ -33,7 +35,7 @@ class ThirdPage(object):
 
         Label(self.root, text='Preview', bg='black', fg='white').place(x=500, y=60, width=480, height=360)
 
-        self.previewLabel = Label(self.root)
+        self.previewLabel = Label(self.root, name="preview_label")
         self.previewLabel.place(x=500, y=90, width=480, height=360)
 
         cbox = Combobox(self.root, textvariable=StringVar())
@@ -72,6 +74,9 @@ class ThirdPage(object):
         ThirdPage(self.asts, self.rootpath, self.root)
 
     def saveAsIndividualInt(self):
+        self.asts.cp = -1
+        self.cc.stop_lv()
+
         self.clear()
         # if os.path.exists(f"{self.pm.root_path}/{self.pm._latitude}/{self.pm._num1}/{self.pm._num2}/{self.pm.context}/finds/individual/1"):
         #     # os.makedirs(f"{self.pm.root_path}/{self.pm._latitude}/{self.pm._num1}/{self.pm._num2}/{self.pm.context}/finds/individual/"+str(int(self.pm.find_sub_dir(self, f"{self.pm.root_path}/{self.pm._latitude}/{self.pm._num1}/{self.pm._num2}/{self.pm.context}/finds/individual/")[-1])+1))
