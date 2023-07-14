@@ -1,11 +1,35 @@
 import os
+import subprocess
+from PIL import Image
+import io
+import platform
 
 class cameraControl:
     _DEBUG = False
+    lv_process = None
+
     def __init__(self, tmp_dir = "/tmp/") -> None:
         # assume tmp_fp is empty
         self.tmp_dir = tmp_dir
         self.count = 0
+
+    def start_lv(self):
+        self.lv_process = subprocess.Popen(["gphoto2", "--capture-movie", "--stdout"], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+
+    def get_lv_frame(self):
+        out_list = []
+        while True:
+            out = self.lv_process.stdout.readline()
+            out_list.append(out)
+            if b"\xff\xd9" in out:
+                break
+        out = b"".join(out_list)
+        if platform.system() == "Windows":
+            out = out.replace(b"\x0d\x0a", b"\x0a")
+        return Image.open(io.BytesIO(out))
+    
+    def stop_lv(self):
+        self.lv_process.kill()
 
     def capture_preview(self) -> str:
         """
