@@ -4,6 +4,7 @@ from PIL import Image
 import io
 import platform
 import threading
+import rawpy
 
 
 class cameraControl:
@@ -128,6 +129,11 @@ class cameraControl:
         ret = os.system("gphoto2 --capture-image-and-download --filename={} --force-overwrite".format(fp))
         return ret
 
+    @staticmethod
+    def get_thumb(raw_fp):
+        with rawpy.imread(raw_fp) as raw:
+            thumb = raw.extract_thumb()
+            return Image.open(io.BytesIO(thumb.data))
 
 if __name__ == "__main__":
     cc = cameraControl()
