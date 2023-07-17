@@ -10,11 +10,7 @@ This project intergrates photo taking, photo uploading and database synchronizat
   * Create find object on server after recording the find (new)
 &nbsp;
 ## Table of Contents
-* [1. Installation] (#1-installation)
-* [2. Configuration] (#2-configuration)
-* [3. Usage] (#3-usage)
-* [4. Credits] (#4-credits)
-* [5. Reference] (#5-reference)
+[toc]
 &nbsp;
 ## 1.Installation 
 (install project and dependencies)
