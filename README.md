@@ -16,20 +16,20 @@ This project intergrates photo taking, photo uploading and database synchronizat
 * [4. Credits] (#4-credits)
 * [5. Reference] (#5-reference)
 &nbsp;
-## 1. Installation 
+## 1.Installation 
 (install project and dependencies)
 
-## 2. Configuration 
+## 2.Configuration 
 (both hardware and software)
-## 3. Usage
+## 3.Usage
 (workflow)
-## 4. Credits
+## 4.Credits
 * LI Haochen, Harry - Project structure, photo uploading function and server synchronization function
 * JIN Yushang, Eric - Photo taking function, livestream and preview function, weight measurement function
 * FAN Zheyu, Uky - GUI backend design, GUI frontend design, logic design and optimization, function assembl
 * SONG Yichuan, Tiger - GUI design
 * &nbsp;
-## 5. Reference
+## 5.Reference
 ### From Test Server 
 #### (For testing backend) https://github.com/ggetzie/aslcv2_be/blob/master/main/test_local.py
 
