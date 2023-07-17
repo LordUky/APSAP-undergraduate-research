@@ -31,7 +31,6 @@ class FourthPage(object):
         for w in self.root.winfo_children():
             w.place_forget()
 
-
     def sample(self):
         weight = self.sr.read()
         self.sr.write_to_file(weight, self.fp_parent + "/a.xlsx")
@@ -39,4 +38,3 @@ class FourthPage(object):
         self.clear()
         self.sr.stop()
         FirstPage(self.asts, self.rootpath, self.root)
-

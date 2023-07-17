@@ -5,9 +5,10 @@ import io
 import platform
 import threading
 
+
 class cameraControl:
-    _DEBUG = False
-    
+    _DEBUG = True
+
     lv_process = None
     lv_thread = None
 
@@ -16,7 +17,7 @@ class cameraControl:
     LV_UPDATE_TIMEOUT = 0.5  # second
     LV_UPDATE_CHUNK = 1024  # bytes
 
-    def __init__(self, tmp_dir = "/tmp/") -> None:
+    def __init__(self, tmp_dir="/tmp/") -> None:
         # assume tmp_fp is empty
         self.tmp_dir = tmp_dir
         self.count = 0
@@ -56,10 +57,11 @@ class cameraControl:
     #         self.lv_process.kill()
     #     self.lv_process = None
 
-
     def start_lv(self):
+        if self._DEBUG:
+            return
         self.lv_process = subprocess.Popen(["gphoto2", "--capture-movie", "--stdout"], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
-        
+
         self.lv_update_running = True
         self.lv_thread = threading.Thread(target=self._update_lv_frame)
         self.lv_thread.start()
@@ -70,33 +72,36 @@ class cameraControl:
             out = self.lv_process.stdout.read(self.LV_UPDATE_CHUNK)
             sof_idx = out.find(b"\xff\xd8")
             eof_idx = out.find(b"\xff\xd9")
-            
-            if (eof_idx != -1 and out_list != []):  # end of frame exists, and outlist not empty
-                out_list.append(out[ : eof_idx + 2])
+
+            if eof_idx != -1 and out_list != []:  # end of frame exists, and outlist not empty
+                out_list.append(out[: eof_idx + 2])
                 frame_bytes = b"".join(out_list)
                 if platform.system() == "Windows":
                     frame_bytes = frame_bytes.replace(b"\x0d\x0a", b"\x0a")
-                try:    
+                try:
                     self.lv_frame = Image.open(io.BytesIO(frame_bytes))
                 except:
                     pass
                 out_list = []
 
-            if (sof_idx != -1):  # start of frame exists
-                out_list = []
-                out_list.append(out[sof_idx : ])
-            
-            if (sof_idx == -1 and eof_idx == -1 and out_list != []):  # interval bytes, and outlist not empty
+            if sof_idx != -1:  # start of frame exists
+                out_list = [out[sof_idx:]]
+
+            if sof_idx == -1 and eof_idx == -1 and out_list != []:  # interval bytes, and outlist not empty
                 out_list.append(out)
 
     def get_lv_frame(self):
+        if self._DEBUG:
+            return Image.open("cam_ctrl/aaa.jpg")
         return self.lv_frame
-    
+
     def stop_lv(self):
-        if (self.lv_process != None):
+        if self._DEBUG:
+            return
+        if self.lv_process is not None:
             self.lv_process.kill()
             self.lv_process = None
-        if (self.lv_thread != None):
+        if self.lv_thread is not None:
             self.lv_update_running = False
             self.lv_thread.join()
             self.lv_thread = None
@@ -109,7 +114,7 @@ class cameraControl:
         if self._DEBUG:
             return "cam_ctrl/aaa.jpg"
         cpf = "{}.jpg".format(self.count)
-        if (os.system("gphoto2 --capture-preview --filename={} --force-overwrite".format(self.tmp_dir + cpf)) != 0):
+        if os.system("gphoto2 --capture-preview --filename={} --force-overwrite".format(self.tmp_dir + cpf)) != 0:
             return None
         self.count += 1
         return self.tmp_dir + "thumb_" + cpf
@@ -122,12 +127,14 @@ class cameraControl:
             return 0
         ret = os.system("gphoto2 --capture-image-and-download --filename={} --force-overwrite".format(fp))
         return ret
-    
+
+
 if __name__ == "__main__":
     cc = cameraControl()
     cc.start_lv()
 
     import time
+
     try:
         for i in range(10):
             img = cc.get_lv_frame()

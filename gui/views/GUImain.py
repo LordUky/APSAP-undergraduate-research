@@ -2,9 +2,10 @@ from tkinter import *
 from .LoginPage import *
 from PIL import ImageTk
 
+
 class GUImain():
 
-    def __init__(self, asts = None):
+    def __init__(self, asts=None):
         self.asts = asts
         self.root = Tk()
         self.root.title('APSAP')
@@ -14,7 +15,7 @@ class GUImain():
         self.root.after(100, self.refreshLvHelper)
         self.root.mainloop()
         print("ML END")
-        del(self.asts.sr)
+        del (self.asts.sr)
         self.asts.cc.stop_lv()
 
     def refreshLvHelper(self):
@@ -22,7 +23,7 @@ class GUImain():
             try:
                 img = self.asts.cc.get_lv_frame()
                 img = ImageTk.PhotoImage(img)
-                self.root.nametowidget("preview_label")["image"] =  img
+                self.root.nametowidget("preview_label")["image"] = img
                 self.root.nametowidget("preview_label").image = img
             except:
                 pass

@@ -29,7 +29,7 @@ class ThirdPage(object):
         #     self.previewLabel["image"] = tkim
 
     def createPage(self):
-        Button(self.root, text='Retake', command=self.retake).place(x=60, y=100, width=200, height=40)
+        Button(self.root, text='Take pic and preview', command=self.retake).place(x=60, y=100, width=200, height=40)
 
         Button(self.root, text='Exit (Not Saving)', command=self.exitNotSaving).place(x=60, y=200, width=200, height=40)
 
@@ -38,15 +38,15 @@ class ThirdPage(object):
         self.previewLabel = Label(self.root, name="preview_label")
         self.previewLabel.place(x=500, y=90, width=480, height=360)
 
-        cbox = Combobox(self.root, textvariable=StringVar())
-        cbox['values'] = ('Material',)
-        cbox.current(0)
-        cbox.place(x=40, y=300, width=100, height=20)
+        Label(self.root, text='Choose Material: ').place(x=60, y=300)
 
-        Label(self.root, text='Weight: xxx g').place(x=60, y=500, width=100, height=20)
+        self.cbox = Combobox(self.root, textvariable=StringVar())
+        self.cbox['values'] = ['', 'pottery', 'bone', 'stone', 'pottery seive', 'bone seive', 'stone seive', 'spetial finds']
+        self.cbox.current(0)
+        self.cbox.place(x=160, y=300, width=100, height=20)
+        # self.cbox.bind('<<ComboboxSelected>>', self.materialSelected)
 
-        Button(self.root, text='Save as individual int()', command=self.saveAsIndividualInt).place(x=600, y=550,
-                                                                                                   width=200, height=40)
+        Button(self.root, text='save photos and start scaling', command=self.saveAsIndividualInt).place(x=600, y=550, width=200, height=40)
 
     def clear(self):
         for w in self.root.winfo_children():
@@ -76,7 +76,6 @@ class ThirdPage(object):
     def saveAsIndividualInt(self):
         self.asts.cp = -1
         self.cc.stop_lv()
-
         self.clear()
         # if os.path.exists(f"{self.pm.root_path}/{self.pm._latitude}/{self.pm._num1}/{self.pm._num2}/{self.pm.context}/finds/individual/1"):
         #     # os.makedirs(f"{self.pm.root_path}/{self.pm._latitude}/{self.pm._num1}/{self.pm._num2}/{self.pm.context}/finds/individual/"+str(int(self.pm.find_sub_dir(self, f"{self.pm.root_path}/{self.pm._latitude}/{self.pm._num1}/{self.pm._num2}/{self.pm.context}/finds/individual/")[-1])+1))

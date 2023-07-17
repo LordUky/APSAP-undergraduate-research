@@ -10,6 +10,7 @@ import time
 
 class SecondPage(object):
     def __init__(self, asts, rp=r"D:/ararat/data/files/N", r=None):
+        self.previewLabel = None
         self.pm = asts.pm
         self.asts = asts
         self.asts.cp = 2
@@ -32,7 +33,7 @@ class SecondPage(object):
         self.asts.cp = 2
 
     def createPage(self):
-        Button(self.root, text='Retake', command=self.retake).place(x=60, y=100, width=200, height=40)
+        Button(self.root, text='Take pic and preview', command=self.retake).place(x=60, y=100, width=200, height=40)
 
         Button(self.root, text='Exit (Not Saving)', command=self.exitNotSaving).place(x=60, y=200, width=200, height=40)
 

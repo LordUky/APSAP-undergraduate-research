@@ -5,12 +5,13 @@ import datetime
 import time
 import threading
 
+
 class scaleRead:
     _DEBUG = False
     running = False
     weight = -1
 
-    def __init__(self, serial_port, debug = False) -> None:
+    def __init__(self, serial_port, debug=False) -> None:
         self._DEBUG = debug
         if not self._DEBUG:
             self.ser = serial.Serial(serial_port, 9600, timeout=1)
@@ -56,6 +57,7 @@ class scaleRead:
         if not self._DEBUG:
             self.ser.close()
 
+
 if __name__ == "__main__":
     sr = scaleRead("COM11")
     sr.start()
@@ -64,7 +66,7 @@ if __name__ == "__main__":
         weight = sr.read()
         print(weight)
         time.sleep(0.514)
-    
+
     sr.stop()
     print("_DEL")
     del sr
