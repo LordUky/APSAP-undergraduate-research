@@ -32,6 +32,10 @@ This project intergrates photo taking, photo uploading and database synchronizat
 * SONG Yichuan, Tiger - GUI design
 * &nbsp;
 ## 5.Reference
-### From Test Server Builder
-#### [For testing backend](https://github.com/ggetzie/aslcv2_be/blob/master/main/test_local.py)
-
+### 5.1 From Test Server Builder
+#### [Python code: testing backend](https://github.com/ggetzie/aslcv2_be/blob/master/main/test_local.py)
+#### [Restricted material and category combinations for uploading](https://j20200007.kotsf.com/asl/api/find/mc/)
+### 5.2 Test server
+#### [Test server](https://j20200007.kotsf.com/asl/)
+#### [API.cs](https://github.com/ggetzie/ObjectPhotoUploader/blob/master/ObjectPhotoUploader/API.cs)
+#### Test server login: username:*autophoto*;password:*Armenia1*
