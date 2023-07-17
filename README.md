@@ -30,12 +30,15 @@ This project intergrates photo taking, photo uploading and database synchronizat
 * JIN Yushang, Eric - Photo taking function, livestream and preview function, weight measurement function
 * FAN Zheyu, Uky - GUI backend design, GUI frontend design, logic design and optimization, function assembl
 * SONG Yichuan, Tiger - GUI design
+* Special thanks to Gabriel Paul Getzie for help on test server related issue.
 * &nbsp;
 ## 5.Reference
 ### 5.1 From Test Server Builder
 #### [Python code: testing backend](https://github.com/ggetzie/aslcv2_be/blob/master/main/test_local.py)
 #### [Restricted material and category combinations for uploading](https://j20200007.kotsf.com/asl/api/find/mc/)
-### 5.2 Test server
+### 5.2 Test Server Related
 #### [Test server](https://j20200007.kotsf.com/asl/)
 #### [API.cs](https://github.com/ggetzie/ObjectPhotoUploader/blob/master/ObjectPhotoUploader/API.cs)
 #### Test server login: username:*autophoto*;password:*Armenia1*
+### 5.3 Hardware Related
+#### [Electronic Scale Continuous Streaming Setting](https://forum.arduino.cc/t/interfacing-with-scales-rs232-gm-series-scales-bonita-labs-gmb-flb-forelibra-solved/906449/8)
