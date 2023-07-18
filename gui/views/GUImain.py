@@ -8,6 +8,7 @@ class GUImain():
     def __init__(self, asts=None):
         self.asts = asts
         self.root = Tk()
+        self.root.configure(bg=self.asts.bgColor)
         self.root.title('APSAP')
         LoginPage(asts, self.root)
 
