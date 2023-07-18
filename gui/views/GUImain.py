@@ -19,7 +19,7 @@ class GUImain():
         self.asts.cc.stop_lv()
 
     def refreshLvHelper(self):
-        if self.asts.cp == 2 or self.asts.cp == 3:
+        if (self.asts.cp == 2 or self.asts.cp == 3) and not self.asts.pic_taken:
             try:
                 img = self.asts.cc.get_lv_frame()
                 img = ImageTk.PhotoImage(img)

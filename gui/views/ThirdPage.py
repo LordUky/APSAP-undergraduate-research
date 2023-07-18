@@ -4,6 +4,7 @@ from tkinter import ttk
 from tkinter.messagebox import *
 from .FourthPage import *
 from PIL import ImageTk
+import time
 
 import logging
 
@@ -62,7 +63,11 @@ class ThirdPage(object):
         FirstPage(self.asts, self.rootpath, self.root)
 
     def take(self):
+        # turn off live view
         self.cc.stop_lv()
+        self.asts.pic_taken = True
+        time.sleep(0.1)
+        
         self.confirmButton.configure(state='normal')
         self.alterButton.configure(text='abort')
         self.alterButton.configure(command=self.abort)
@@ -75,7 +80,11 @@ class ThirdPage(object):
             print("retake cap prev fail")
 
     def abort(self):
+        # turn on live view
         self.cc.start_lv()
+        self.asts.pic_taken = False
+        time.sleep(0.1)
+        
         self.confirmButton.configure(state='disabled')
         self.alterButton.configure(text='Take pic and preview')
         self.alterButton.configure(command=self.take)

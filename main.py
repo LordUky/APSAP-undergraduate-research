@@ -12,5 +12,6 @@ class assistants():
         self.cp = 0  # current page. 0:login; 1:firstPage; ......
         self.fc = {'combo1': None, 'combo2': None, 'combo3': None, 'combo4': None}
 
+        self.pic_taken = False
 
 gui.views.GUImain.GUImain(assistants())
