@@ -68,7 +68,7 @@ class SecondPage(object):
         self.asts.cp = -1
         self.cc.stop_lv()
 
-        time.sleep(1)
+        # time.sleep(1)
 
         from .ThirdPage import ThirdPage
         self.clear()
