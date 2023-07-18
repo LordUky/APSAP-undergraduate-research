@@ -43,8 +43,9 @@ class LoginPage(object):
     def loginCheck(self):
         from .FirstPage import FirstPage
         name = self.username.get()
-        secret = self.password.get()
-        if name == '' and secret == '':
+        secure = self.password.get()
+        status = self.asts.api.login(name, secure)
+        if status == 1:
             self.asts.surprise = bool(self.checkButtonIntVar.get())
             self.page.destroy()
             self.portSelected()

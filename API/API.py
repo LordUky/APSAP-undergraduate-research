@@ -4,9 +4,8 @@ import requests
 
 class API:
     # initiation function
-    def __init__(self,base_url,isTest:bool=True) -> None:
+    def __init__(self,base_url) -> None:
         self.base_url = base_url
-        self.isTest = isTest
         self.session = requests.Session()
 
     # get data
@@ -21,10 +20,9 @@ class API:
             token = response.json()['token']
             # print("Current toke = ",token)
             self.token = token
-
+            return 1
         else:
-            print(response.status_code)
-            print(response.text)                
+            return 0
     
     # post data into database
     def create_find(self,data:dict):

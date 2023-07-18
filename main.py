@@ -3,10 +3,12 @@ from cam_ctrl import cam_ctrl
 from scale_read import scale_read
 import sys
 import random
+from API.API import API
 
 
 class assistants():
     def __init__(self) -> None:
+        self.api = API("https://j20200007.kotsf.com/asl/")
         self.pm = gui.models.photo_manager(r"photo_folder/N")
         self.cc = cam_ctrl.cameraControl(tmp_dir="tmp/", debug=True)
         self.sr = None

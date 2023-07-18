@@ -4,14 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="8c8e226e-1aba-40fb-8616-283e480e391e" name="Changes" comment="change retake buttons to (take, abort) alter buttons, add port selection and other functions">
+    <list default="true" id="8c8e226e-1aba-40fb-8616-283e480e391e" name="Changes" comment="surprises! colors!">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gui/views/FirstPage.py" beforeDir="false" afterPath="$PROJECT_DIR$/gui/views/FirstPage.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gui/views/FourthPage.py" beforeDir="false" afterPath="$PROJECT_DIR$/gui/views/FourthPage.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gui/views/GUImain.py" beforeDir="false" afterPath="$PROJECT_DIR$/gui/views/GUImain.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/API/API.py" beforeDir="false" afterPath="$PROJECT_DIR$/API/API.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/gui/views/LoginPage.py" beforeDir="false" afterPath="$PROJECT_DIR$/gui/views/LoginPage.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gui/views/SecondPage.py" beforeDir="false" afterPath="$PROJECT_DIR$/gui/views/SecondPage.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gui/views/ThirdPage.py" beforeDir="false" afterPath="$PROJECT_DIR$/gui/views/ThirdPage.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -96,7 +92,7 @@
       <workItem from="1689574061087" duration="7203000" />
       <workItem from="1689649179355" duration="842000" />
       <workItem from="1689650032139" duration="8112000" />
-      <workItem from="1689685926915" duration="6782000" />
+      <workItem from="1689685926915" duration="8264000" />
     </task>
     <task id="LOCAL-00001" summary="GUI link with scaleReader">
       <created>1688709347263</created>
@@ -147,7 +143,14 @@
       <option name="project" value="LOCAL" />
       <updated>1689656073700</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="surprises! colors!">
+      <created>1689693505969</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1689693505969</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -170,7 +173,8 @@
     <MESSAGE value="fix a bug of creating the first context from empty" />
     <MESSAGE value="combobox saving values , and other features" />
     <MESSAGE value="change retake buttons to (take, abort) alter buttons, add port selection and other functions" />
-    <option name="LAST_COMMIT_MESSAGE" value="change retake buttons to (take, abort) alter buttons, add port selection and other functions" />
+    <MESSAGE value="surprises! colors!" />
+    <option name="LAST_COMMIT_MESSAGE" value="surprises! colors!" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/APSAP_undergraduate_research$FirstPage.coverage" NAME="FirstPage Coverage Results" MODIFIED="1689692403935" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/gui/views" />
