@@ -48,7 +48,7 @@ This section is for both hardware and software)
 * FAN Zheyu, Uky - GUI backend design, GUI frontend design, logic optimization
 * SONG Yichuan, Tiger - GUI design
 * Special thanks to Gabriel Paul Getzie for helping on test server related issue.
-* &nbsp;
+&nbsp;
 ## 5.Reference
 ### 5.1 From Test Server Builder
 #### [Python code: testing backend](https://github.com/ggetzie/aslcv2_be/blob/master/main/test_local.py)
