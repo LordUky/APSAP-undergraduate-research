@@ -4,16 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="8c8e226e-1aba-40fb-8616-283e480e391e" name="Changes" comment="fix a bug of creating the first context from empty">
+    <list default="true" id="8c8e226e-1aba-40fb-8616-283e480e391e" name="Changes" comment="combobox saving values , and other features">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cam_ctrl/cam_ctrl.py" beforeDir="false" afterPath="$PROJECT_DIR$/cam_ctrl/cam_ctrl.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gui/views/FirstPage.py" beforeDir="false" afterPath="$PROJECT_DIR$/gui/views/FirstPage.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gui/views/FourthPage.py" beforeDir="false" afterPath="$PROJECT_DIR$/gui/views/FourthPage.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gui/views/GUImain.py" beforeDir="false" afterPath="$PROJECT_DIR$/gui/views/GUImain.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gui/views/LoginPage.py" beforeDir="false" afterPath="$PROJECT_DIR$/gui/views/LoginPage.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/gui/views/SecondPage.py" beforeDir="false" afterPath="$PROJECT_DIR$/gui/views/SecondPage.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/gui/views/ThirdPage.py" beforeDir="false" afterPath="$PROJECT_DIR$/gui/views/ThirdPage.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scale_read/scale_read.py" beforeDir="false" afterPath="$PROJECT_DIR$/scale_read/scale_read.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -31,21 +26,21 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "ToolWindowRun.ShowToolbar": "false",
-    "WebServerToolWindowFactoryState": "false",
-    "git-widget-placeholder": "main",
-    "last_opened_file_path": "C:/Users/User/PycharmProjects/APSAP-undergraduate-research",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "settings.editor.selected.configurable": "com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;ToolWindowRun.ShowToolbar&quot;: &quot;false&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/User/PycharmProjects/AntibioticProject&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RunManager">
     <configuration name="main" type="PythonConfigurationType" factoryName="Python" nameIsGenerated="true">
       <module name="APSAP-undergraduate-research" />
@@ -87,7 +82,9 @@
       <workItem from="1688990995660" duration="8000" />
       <workItem from="1689131628422" duration="56000" />
       <workItem from="1689320364885" duration="21000" />
-      <workItem from="1689574061087" duration="6512000" />
+      <workItem from="1689574061087" duration="7203000" />
+      <workItem from="1689649179355" duration="842000" />
+      <workItem from="1689650032139" duration="5534000" />
     </task>
     <task id="LOCAL-00001" summary="GUI link with scaleReader">
       <created>1688709347263</created>
@@ -124,7 +121,14 @@
       <option name="project" value="LOCAL" />
       <updated>1688963316703</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="combobox saving values , and other features">
+      <created>1689591184484</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1689591184484</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -145,9 +149,10 @@
     <MESSAGE value="GUI link with scaleReader" />
     <MESSAGE value="update on-time scale previewamd fixed bugs" />
     <MESSAGE value="fix a bug of creating the first context from empty" />
-    <option name="LAST_COMMIT_MESSAGE" value="fix a bug of creating the first context from empty" />
+    <MESSAGE value="combobox saving values , and other features" />
+    <option name="LAST_COMMIT_MESSAGE" value="combobox saving values , and other features" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/APSAP_undergraduate_research$main.coverage" NAME="main Coverage Results" MODIFIED="1689590348986" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/APSAP_undergraduate_research$main.coverage" NAME="main Coverage Results" MODIFIED="1689655636362" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
 </project>

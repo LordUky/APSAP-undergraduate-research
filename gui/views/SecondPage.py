@@ -18,9 +18,10 @@ class SecondPage(object):
         self.rootpath = rp
         self.root = r
 
-        self.createPage()
+        self.alterButton = None
+        self.confirmButton = None
 
-        self.taken = False
+        self.createPage()
 
 
         # cpf = self.cc.capture_preview()
@@ -35,7 +36,8 @@ class SecondPage(object):
         self.asts.cp = 2
 
     def createPage(self):
-        Button(self.root, text='Take pic and preview', command=self.take).place(x=60, y=100, width=200, height=40)
+        self.alterButton = Button(self.root, text='Take pic and preview', command=self.take)
+        self.alterButton.place(x=60, y=100, width=200, height=40)
 
         Button(self.root, text='Exit (Not Saving)', command=self.exitNotSaving).place(x=60, y=200, width=200, height=40)
 
@@ -44,7 +46,8 @@ class SecondPage(object):
         self.previewLabel = Label(self.root, name="preview_label", text='Preview')
         self.previewLabel.place(x=500, y=90, width=480, height=360)
 
-        Button(self.root, text='Next Side', command=self.nextSide).place(x=600, y=500, width=200, height=40)
+        self.confirmButton = Button(self.root, text='Next Side', command=self.confirm, state='disabled')
+        self.confirmButton.place(x=600, y=500, width=200, height=40)
 
     def clear(self):
         for w in self.root.winfo_children():
@@ -55,6 +58,10 @@ class SecondPage(object):
         FirstPage(self.asts, self.rootpath, self.root)
 
     def take(self):
+        self.cc.stop_lv()
+        self.confirmButton.configure(state='normal')
+        self.alterButton.configure(text='abort')
+        self.alterButton.configure(command=self.abort)
         pv_fp = self.cc.capture_image_and_download()
         if pv_fp:
             tkim = ImageTk.PhotoImage(file=pv_fp)
@@ -62,13 +69,16 @@ class SecondPage(object):
             self.previewLabel.image = tkim
         else:
             print("retake cap prev fail")
-        self.taken = True
+
+    def abort(self):
+        self.cc.start_lv()
+        self.confirmButton.configure(state='disabled')
+        self.alterButton.configure(text='Take pic and preview')
+        self.alterButton.configure(command=self.take)
 
     def confirm(self):
         self.asts.cp = -1
         self.cc.stop_lv()
-
-        time.sleep(1)
 
         from .ThirdPage import ThirdPage
         self.clear()
@@ -95,13 +105,6 @@ class SecondPage(object):
             new_dir = f"{self.pm.root_path}/{self.pm._latitude}/{self.pm._num1}/{self.pm._num2}/{self.pm.context}/finds/individual/1/photos"
             os.makedirs(new_dir)
 
-        while True:
-            cc_ret = self.cc.capture_image_and_download(new_dir + "/1.cr3")
-            if (cc_ret == 0):
-                break
-            else:
-                print("Error {}".format(cc_ret))
-                print("Please check connection and focus and try again.")
-                input("Press Enter after fixing error")
+        self.cc.copy_tmp_image_to_fp(new_dir + "/1.cr3")
 
         ThirdPage(self.asts, self.rootpath, self.root)

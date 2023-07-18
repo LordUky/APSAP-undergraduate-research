@@ -16,6 +16,9 @@ class ThirdPage(object):
         self.rootpath = rp
         self.root = r
 
+        self.alterButton = None
+        self.confirmButton = None
+
         self.createPage()
 
         self.cc.start_lv()
@@ -29,7 +32,11 @@ class ThirdPage(object):
         #     self.previewLabel["image"] = tkim
 
     def createPage(self):
-        Button(self.root, text='Take pic and preview', command=self.retake).place(x=60, y=100, width=200, height=40)
+        self.alterButton = Button(self.root, text='Take pic and preview', command=self.take)
+        self.alterButton.place(x=60, y=100, width=200, height=40)
+
+        self.confirmButton = Button(self.root, text='save photos and start scaling', command=self.saveAsIndividualInt)
+        self.confirmButton.place(x=600, y=500, width=200, height=40)
 
         Button(self.root, text='Exit (Not Saving)', command=self.exitNotSaving).place(x=60, y=200, width=200, height=40)
 
@@ -46,8 +53,6 @@ class ThirdPage(object):
         self.cbox.place(x=160, y=300, width=100, height=20)
         # self.cbox.bind('<<ComboboxSelected>>', self.materialSelected)
 
-        Button(self.root, text='save photos and start scaling', command=self.saveAsIndividualInt).place(x=600, y=550, width=200, height=40)
-
     def clear(self):
         for w in self.root.winfo_children():
             w.place_forget()
@@ -56,22 +61,24 @@ class ThirdPage(object):
         self.clear()
         FirstPage(self.asts, self.rootpath, self.root)
 
-    def retake(self):
-        print('retake reached')
-
-        cpf = self.cc.capture_preview()
-        print('cpf in retake:', cpf)
-        if cpf:
-            tkim = ImageTk.PhotoImage(file=cpf)
+    def take(self):
+        self.cc.stop_lv()
+        self.confirmButton.configure(state='normal')
+        self.alterButton.configure(text='abort')
+        self.alterButton.configure(command=self.abort)
+        pv_fp = self.cc.capture_image_and_download()
+        if pv_fp:
+            tkim = ImageTk.PhotoImage(file=pv_fp)
             self.previewLabel["image"] = tkim
             self.previewLabel.image = tkim
         else:
             print("retake cap prev fail")
 
-    def nextSide(self):
-        from .FirstPage import FirstPage
-        self.clear()
-        ThirdPage(self.asts, self.rootpath, self.root)
+    def abort(self):
+        self.cc.start_lv()
+        self.confirmButton.configure(state='disabled')
+        self.alterButton.configure(text='Take pic and preview')
+        self.alterButton.configure(command=self.take)
 
     def saveAsIndividualInt(self):
         self.asts.cp = -1
@@ -97,13 +104,6 @@ class ThirdPage(object):
 
         print(fp)
 
-        while True:
-            cc_ret = self.cc.capture_image_and_download(fp)
-            if (cc_ret == 0):
-                break
-            else:
-                print("Error {}".format(cc_ret))
-                print("Please check connection and focus and try again.")
-                input("Press Enter after fixing error")
+        self.cc.copy_tmp_image_to_fp(fp)
 
         FourthPage(fp_parent, asts=self.asts, rp=self.rootpath, r=self.root)
