@@ -1,4 +1,4 @@
-# this test changes from test3
+# API for uploading the find onto database
 
 import requests
 
@@ -32,14 +32,14 @@ class API:
         api_url = self.base_url + "api/find/"
 
         response = self.session.post(api_url, data= data, headers= headers)
-        print(response.text)
+        # print(response.text)
 
         if response.status_code == 201:
             print("New finds added")
         else: 
             print(response.status_code)
             print("Add failed")
-        
+        return response.json()['find_number']
 
 if __name__ == "__main__":
     # test website url
@@ -65,5 +65,5 @@ if __name__ == "__main__":
 
     api = API(base_url)
     api.login(username=username,password=password)
-    api.create_find(data)
-    
+    find_num = api.create_find(data)
+    print(find_num)
