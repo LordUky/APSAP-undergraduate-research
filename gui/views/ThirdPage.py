@@ -24,6 +24,7 @@ class ThirdPage(object):
 
         self.cc.start_lv()
         self.asts.cp = 3
+        self.asts.pic_taken = False
 
         # cpf = self.cc.capture_preview()
         # logging.debug("cpf", cpf)

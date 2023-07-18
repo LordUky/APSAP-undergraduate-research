@@ -42,7 +42,7 @@ class scaleRead:
             return self.weight
 
     @staticmethod
-    def write_to_file(self, weight: float, fp: str) -> None:
+    def write_to_file(weight: float, fp: str) -> None:
         wb = pyxl.Workbook()
         ws = wb.active
 

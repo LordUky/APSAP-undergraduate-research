@@ -130,7 +130,7 @@ class cameraControl:
     """
     def capture_image_and_download(self):
         if self._DEBUG:
-            return "cam_ctrl/aaa.jpg"
+            return "cam_ctrl/bbb.jpg"
         # ret = os.system("gphoto2 --capture-image-and-download --filename={} --force-overwrite".format(fp))
         # os.system("cd tmp; gphoto2 --capture-image-and-download --force-overwrite; cd ..; cp tmp/capt0001.cr3 {}")
         os.system(f"cd {self.tmp_dir} && gphoto2 --capture-image-and-download --force-overwrite && cd ..")
@@ -141,6 +141,9 @@ class cameraControl:
     'Download' the latest cr3 image to fp
     """
     def copy_tmp_image_to_fp(self, fp):
+        if self._DEBUG:
+            os.system("cp cam_ctrl/aaa.jpg {}".format(fp))
+            return
         return os.system("cp tmp/capt0001.cr3 {}".format(fp))
 
     # @staticmethod

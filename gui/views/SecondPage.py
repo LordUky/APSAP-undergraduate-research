@@ -34,6 +34,7 @@ class SecondPage(object):
         #     print("[ERROR]\tcapture preview fail")
         self.cc.start_lv()
         self.asts.cp = 2
+        self.asts.pic_taken = False
 
     def createPage(self):
         self.alterButton = Button(self.root, text='Take pic and preview', command=self.take)

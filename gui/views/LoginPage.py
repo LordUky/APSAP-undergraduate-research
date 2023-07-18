@@ -30,8 +30,10 @@ class LoginPage(object):
         Button(self.page, text='Quit', command=self.page.quit).grid(row=4, column=1, stick=E)
 
     def portSelected(self, a = None):
-        com_port = self.portComboVar.get()
-        self.asts.sr = scaleRead(com_port, debug=(com_port == "x"))
+        if self.asts.sr == None:
+            com_port = self.portComboVar.get()
+            self.asts.sr = scaleRead(com_port, debug=(com_port == "x"))
+            print("scale reader inited", self.asts.sr)
 
     def loginCheck(self):
         from .FirstPage import FirstPage
@@ -39,6 +41,7 @@ class LoginPage(object):
         secret = self.password.get()
         if name == '' and secret == '':
             self.page.destroy()
+            self.portSelected()
             FirstPage(self.asts, self.pm.root_path, self.root)
         else:
             showinfo(title='Oops!', message='Identification Failed!')
