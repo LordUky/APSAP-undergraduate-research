@@ -29,7 +29,7 @@ class LoginPage(object):
         Button(self.page, text='Login', command=self.loginCheck).grid(row=4, stick=W, pady=10)
         Button(self.page, text='Quit', command=self.page.quit).grid(row=4, column=1, stick=E)
 
-    def portSelected(self):
+    def portSelected(self, a = None):
         com_port = self.portComboVar.get()
         self.asts.sr = scaleRead(com_port, debug=(com_port == "x"))
 
