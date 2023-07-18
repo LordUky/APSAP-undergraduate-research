@@ -20,7 +20,21 @@ This project intergrates photo taking, photo uploading and database synchronizat
 ### 1.1 Installation from FLASH DISK/Onedrive
 Install by copy and paste the whole project folder from Flash Disk/Onedrive, then it is good to go. All dependencies should be included.
 ### 1.2 Installation from Biginning
-(To be done by Eric)
+#### Install MSYS2
+Follow the msys2 official site:
+[https://www.msys2.org/wiki/MSYS2-installation/](https://www.msys2.org/wiki/MSYS2-installation/)
+
+#### Install dependencies
+```bash
+pacman -S mingw-w64-x86_64-gphoto2
+pacman -S mingw-w64-x86_64-python
+pacman -S mingw-w64-x86_64-python-pillow
+pacman -S mingw-w64-x86_64-python3-pyserial
+```
+
+#### Obtain `.pyc` executable from Internet
+__to be done__
+
 &nbsp;
 ## 2.Configuration 
 This section is for both hardware and software)
