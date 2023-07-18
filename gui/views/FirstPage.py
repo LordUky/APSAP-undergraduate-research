@@ -68,7 +68,7 @@ class FirstPage(object):
 
         self.ContextNumberLabel = Label(self.root, text='Context Number:', anchor='w', bg=self.asts.bgColor if not self.asts.surprise else self.asts.getRandomColor())
         self.ContextNumberLabel.place(x=20, y=120, width=200, height=20)
-        self.combo4 = Combobox(self.root, values=['', 'create new'] + self.pm.find_sub_dir(self.pm.root_path),
+        self.combo4 = Combobox(self.root, values=[''] + self.pm.find_sub_dir(self.pm.root_path),
                                state="disabled", textvariable=self.combovar4)
         self.combo4.place(x=220, y=120, width=100, height=20)
         self.combo4.bind('<<ComboboxSelected>>', self.comcmd4)
@@ -124,7 +124,9 @@ class FirstPage(object):
         self.asts.fc['combo3'] = self.combovar3.get()
         self.pm.num2 = self.combovar3.get()
         self.combo4['state'] = 'readonly'
-        self.combo4['values'] = ['create new'] + self.pm.find_sub_dir(
+        # self.combo4['values'] = ['create new'] + self.pm.find_sub_dir(
+        #     f"{self.pm.root_path}/{self.pm.latitude}/{self.pm.num1}/{self.pm.num2}")
+        self.combo4['values'] = self.pm.find_sub_dir(
             f"{self.pm.root_path}/{self.pm.latitude}/{self.pm.num1}/{self.pm.num2}")
         return
 
@@ -134,12 +136,14 @@ class FirstPage(object):
         if self.combovar4.get() == '':
             self.newPicButton['state'] = 'disabled'
             return
-        if self.combovar4.get() == 'create new':
-            self.newPicButton['state'] = 'disabled'
-            askback = askyesno('confirm', 'create new context??')
-            if askback:
-                self.NewContext()
-            return
+        if False:
+            pass
+        # if self.combovar4.get() == 'create new':
+        #     self.newPicButton['state'] = 'disabled'
+        #     askback = askyesno('confirm', 'create new context??')
+        #     if askback:
+        #         self.NewContext()
+        #     return
         else:
             self.asts.fc['combo4'] = self.combovar4.get()
         self.pm.context = self.combovar4.get()
@@ -161,16 +165,16 @@ class FirstPage(object):
         self.clear()
         SecondPage(self.asts, self.rootpath, self.root)
 
-    def NewContext(self):
-        if self.asts.surprise:
-            self.SurpriseColorUpdate()
-        if len(self.pm.find_sub_dir(f"{self.pm.root_path}/{self.pm.latitude}/{self.pm.num1}/{self.pm.num2}")) == 0:
-            self.pm.create_context(1)
-        else:
-            self.pm.create_context(
-                int(self.pm.find_sub_dir(f"{self.pm.root_path}/{self.pm.latitude}/{self.pm.num1}/{self.pm.num2}")[-1]) + 1)
-        self.combo4['values'] = ['create new'] + self.pm.find_sub_dir(
-            f"{self.pm.root_path}/{self.pm.latitude}/{self.pm.num1}/{self.pm.num2}")
+    # def NewContext(self):
+    #     if self.asts.surprise:
+    #         self.SurpriseColorUpdate()
+    #     if len(self.pm.find_sub_dir(f"{self.pm.root_path}/{self.pm.latitude}/{self.pm.num1}/{self.pm.num2}")) == 0:
+    #         self.pm.create_context(1)
+    #     else:
+    #         self.pm.create_context(
+    #             int(self.pm.find_sub_dir(f"{self.pm.root_path}/{self.pm.latitude}/{self.pm.num1}/{self.pm.num2}")[-1]) + 1)
+    #     self.combo4['values'] = ['create new'] + self.pm.find_sub_dir(
+    #         f"{self.pm.root_path}/{self.pm.latitude}/{self.pm.num1}/{self.pm.num2}")
 
     def SurpriseColorUpdate(self):
         try:
