@@ -40,7 +40,7 @@ This section is for both hardware and software)
 * Check if the lab NAS drive is connected and mapped to local machine.
 &nbsp;
 ## 3.Usage
-(workflow)
+[Demo video]()
 &nbsp;
 ## 4.Credits
 * LI Haochen, Harry - Software, Photo uploading function and server synchronization function
