@@ -1,3 +1,4 @@
+import random
 import tkinter
 from tkinter import *
 from tkinter.ttk import Combobox
@@ -7,6 +8,11 @@ from tkinter.messagebox import askyesno
 class FirstPage(object):
     def __init__(self, asts=None, rp=r"D:/ararat/data/files/N", r=None):
 
+        self.PreviewPicLabel = None
+        self.ContextNumberLabel = None
+        self.NorthingLabel = None
+        self.EastingLabel = None
+        self.NLabel = None
         self.newPicButton = None
         self.combo4 = None
         self.combo3 = None
@@ -27,33 +33,41 @@ class FirstPage(object):
 
         self.createPage()
 
+        self.colorMembers = [self.root, self.NLabel, self.EastingLabel, self.NorthingLabel, self.ContextNumberLabel, self.PreviewPicLabel]
+
     def createPage(self):
 
         # Label(self.root, text='current root path: ', anchor='w').place(x=20, y=0, width=20, height=20)
+        if self.asts.surprise:
+            self.root.configure(bg=self.asts.bgColor if not self.asts.surprise else self.asts.getRandomColor())
 
         self.newPicButton = Button(self.root, text='Take New Picture', command=self.TakeNewPicture, state='disabled')
         self.newPicButton.place(x=20, y=180, width=200, height=20)
 
-        Label(self.root, text='N:', anchor='w').place(x=20, y=30, width=20, height=20)
+        self.NLabel = Label(self.root, text='N:', anchor='w', bg=self.asts.bgColor if not self.asts.surprise else self.asts.getRandomColor())
+        self.NLabel.place(x=20, y=30, width=20, height=20)
 
         self.combo1 = Combobox(self.root, values=[''] + self.pm.find_sub_dir(self.pm.root_path), state="readonly",
                                textvariable=self.combovar1)
         self.combo1.place(x=40, y=30, width=100, height=20)
         self.combo1.bind('<<ComboboxSelected>>', self.comcmd1)
 
-        Label(self.root, text='Easting1:', anchor='w').place(x=20, y=60, width=100, height=20)
+        self.EastingLabel = Label(self.root, text='Easting1:', anchor='w', bg=self.asts.bgColor if not self.asts.surprise else self.asts.getRandomColor())
+        self.EastingLabel.place(x=20, y=60, width=100, height=20)
         self.combo2 = Combobox(self.root, values=[''] + self.pm.find_sub_dir(self.pm.root_path), state="disabled",
                                textvariable=self.combovar2)
         self.combo2.place(x=220, y=60, width=100, height=20)
         self.combo2.bind('<<ComboboxSelected>>', self.comcmd2)
 
-        Label(self.root, text='Northing2:', anchor='w').place(x=20, y=90, width=100, height=20)
+        self.NorthingLabel = Label(self.root, text='Northing2:', anchor='w', bg=self.asts.bgColor if not self.asts.surprise else self.asts.getRandomColor())
+        self.NorthingLabel.place(x=20, y=90, width=100, height=20)
         self.combo3 = Combobox(self.root, values=[''] + self.pm.find_sub_dir(self.pm.root_path), state="disabled",
                                textvariable=self.combovar3)
         self.combo3.place(x=220, y=90, width=100, height=20)
         self.combo3.bind('<<ComboboxSelected>>', self.comcmd3)
 
-        Label(self.root, text='Context Number:', anchor='w').place(x=20, y=120, width=200, height=20)
+        self.ContextNumberLabel = Label(self.root, text='Context Number:', anchor='w', bg=self.asts.bgColor if not self.asts.surprise else self.asts.getRandomColor())
+        self.ContextNumberLabel.place(x=20, y=120, width=200, height=20)
         self.combo4 = Combobox(self.root, values=['', 'create new'] + self.pm.find_sub_dir(self.pm.root_path),
                                state="disabled", textvariable=self.combovar4)
         self.combo4.place(x=220, y=120, width=100, height=20)
@@ -77,9 +91,12 @@ class FirstPage(object):
 
         Button(self.root, text='Log Out', command=self.LogOut).place(x=500, y=20, width=80, height=20)
 
-        Label(self.root, text='Preview', bg='blue').place(x=500, y=60, width=480, height=360)
+        self.PreviewPicLabel = Label(self.root, text='Preview', bg='blue')
+        self.PreviewPicLabel.place(x=500, y=60, width=480, height=360)
 
     def comcmd1(self, a=None):
+        if self.asts.surprise:
+            self.SurpriseColorUpdate()
         if self.combovar1.get() == '':
             return
         self.asts.fc['combo1'] = self.combovar1.get()
@@ -89,6 +106,8 @@ class FirstPage(object):
         return
 
     def comcmd2(self, a=None):
+        if self.asts.surprise:
+            self.SurpriseColorUpdate()
         if self.combovar2.get() == '':
             return
         self.asts.fc['combo2'] = self.combovar2.get()
@@ -98,6 +117,8 @@ class FirstPage(object):
         return
 
     def comcmd3(self, a=None):
+        if self.asts.surprise:
+            self.SurpriseColorUpdate()
         if self.combovar3.get() == '':
             return
         self.asts.fc['combo3'] = self.combovar3.get()
@@ -108,6 +129,8 @@ class FirstPage(object):
         return
 
     def comcmd4(self, a=None):
+        if self.asts.surprise:
+            self.SurpriseColorUpdate()
         if self.combovar4.get() == '':
             self.newPicButton['state'] = 'disabled'
             return
@@ -128,11 +151,19 @@ class FirstPage(object):
             w.place_forget()
 
     def TakeNewPicture(self):
+        if self.asts.surprise:
+            self.SurpriseColorUpdate()
+            a = random.random()
+            if a < 0.6:
+                self.newPicButton.place(x=100*random.random(), y=300*random.random() + 200)
+                return
         from .SecondPage import SecondPage
         self.clear()
         SecondPage(self.asts, self.rootpath, self.root)
 
     def NewContext(self):
+        if self.asts.surprise:
+            self.SurpriseColorUpdate()
         if len(self.pm.find_sub_dir(f"{self.pm.root_path}/{self.pm.latitude}/{self.pm.num1}/{self.pm.num2}")) == 0:
             self.pm.create_context(1)
         else:
@@ -140,6 +171,17 @@ class FirstPage(object):
                 int(self.pm.find_sub_dir(f"{self.pm.root_path}/{self.pm.latitude}/{self.pm.num1}/{self.pm.num2}")[-1]) + 1)
         self.combo4['values'] = ['create new'] + self.pm.find_sub_dir(
             f"{self.pm.root_path}/{self.pm.latitude}/{self.pm.num1}/{self.pm.num2}")
+
+    def SurpriseColorUpdate(self):
+        try:
+            for i in self.colorMembers:
+                try:
+                    i.configure(bg=self.asts.getRandomColor())
+                    i.configure(fg=self.asts.getRandomColor())
+                except:
+                    pass
+        except:
+            pass
 
     def LogOut(self):
         self.root.destroy()

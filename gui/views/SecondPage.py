@@ -10,7 +10,9 @@ import time
 
 class SecondPage(object):
     def __init__(self, asts, rp=r"D:/ararat/data/files/N", r=None):
+        self.exitButton = None
         self.previewLabel = None
+        self.previewPicLabel = None
         self.pm = asts.pm
         self.asts = asts
         self.asts.cp = 2
@@ -23,6 +25,7 @@ class SecondPage(object):
 
         self.createPage()
 
+        self.colorMembers = [self.root, self.alterButton, self.confirmButton, self.exitButton, self.previewLabel, self.previewPicLabel]
 
         # cpf = self.cc.capture_preview()
         # print("cpf", cpf)
@@ -37,28 +40,43 @@ class SecondPage(object):
         self.asts.pic_taken = False
 
     def createPage(self):
-        self.alterButton = Button(self.root, text='Take pic and preview', command=self.take)
+        self.alterButton = Button(self.root, text='Take pic and preview', command=self.take, bg=self.asts.bgColor if not self.asts.surprise else self.asts.getRandomColor())
         self.alterButton.place(x=60, y=100, width=200, height=40)
 
-        Button(self.root, text='Exit (Not Saving)', command=self.exitNotSaving).place(x=60, y=200, width=200, height=40)
+        self.exitButton = Button(self.root, text='Exit (Not Saving)', command=self.exitNotSaving, bg=self.asts.bgColor if not self.asts.surprise else self.asts.getRandomColor())
+        self.exitButton.place(x=60, y=200, width=200, height=40)
 
-        Label(self.root, text='Preview').place(x=500, y=30, width=480, height=360)
+        self.previewLabel = Label(self.root, text='Preview', bg=self.asts.bgColor if not self.asts.surprise else self.asts.getRandomColor())
+        self.previewLabel.place(x=500, y=30, width=480, height=360)
 
-        self.previewLabel = Label(self.root, name="preview_label", text='Preview')
-        self.previewLabel.place(x=500, y=90, width=480, height=360)
+        self.previewPicLabel = Label(self.root, name="preview_label", text='Preview', bg=self.asts.bgColor if not self.asts.surprise else self.asts.getRandomColor())
+        self.previewPicLabel.place(x=500, y=90, width=480, height=360)
 
-        self.confirmButton = Button(self.root, text='Next Side', command=self.confirm, state='disabled')
+        self.confirmButton = Button(self.root, text='Next Side', command=self.confirm, state='disabled', bg=self.asts.bgColor if not self.asts.surprise else self.asts.getRandomColor())
         self.confirmButton.place(x=600, y=500, width=200, height=40)
 
     def clear(self):
         for w in self.root.winfo_children():
             w.place_forget()
 
+    def SurpriseColorUpdate(self):
+        try:
+            for i in self.colorMembers:
+                try:
+                    i.configure(bg=self.asts.getRandomColor())
+                    i.configure(fg=self.asts.getRandomColor())
+                except:
+                    pass
+        except:
+            pass
+
     def exitNotSaving(self):
         self.clear()
         FirstPage(self.asts, self.rootpath, self.root)
 
     def take(self):
+        if self.asts.surprise:
+            self.SurpriseColorUpdate()
         # turn off live view
         self.cc.stop_lv()
         self.asts.pic_taken = True
@@ -70,12 +88,14 @@ class SecondPage(object):
         pv_fp = self.cc.capture_image_and_download()
         if pv_fp:
             tkim = ImageTk.PhotoImage(file=pv_fp)
-            self.previewLabel["image"] = tkim
-            self.previewLabel.image = tkim
+            self.previewPicLabel["image"] = tkim
+            self.previewPicLabel.image = tkim
         else:
             print("retake cap prev fail")
 
     def abort(self):
+        if self.asts.surprise:
+            self.SurpriseColorUpdate()
         # turn on live view
         self.cc.start_lv()
         self.asts.pic_taken = False
@@ -100,7 +120,7 @@ class SecondPage(object):
                 f"{self.pm.root_path}/{self.pm._latitude}/{self.pm._num1}/{self.pm._num2}/{self.pm.context}/finds/individual/")
             if os.path.exists(
                     f"{self.pm.root_path}/{self.pm._latitude}/{self.pm._num1}/{self.pm._num2}/{self.pm.context}/finds/individual/" + str(
-                            max([int(x) for x in dir_list])) + "/photos/2.cr3"):
+                        max([int(x) for x in dir_list])) + "/photos/2.cr3"):
                 new_dir = f"{self.pm.root_path}/{self.pm._latitude}/{self.pm._num1}/{self.pm._num2}/{self.pm.context}/finds/individual/" + str(
                     max([int(x) for x in dir_list]) + 1) + "/photos"
                 os.makedirs(new_dir)

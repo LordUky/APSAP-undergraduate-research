@@ -11,6 +11,11 @@ import logging
 
 class ThirdPage(object):
     def __init__(self, asts=None, rp=r"D:/ararat/data/files/N", r=None):
+        self.chooseMaterialLabel = None
+        self.cbox = None
+        self.previewPicLabel = None
+        self.previewLabel = None
+        self.exitButton = None
         self.pm = asts.pm
         self.asts = asts
         self.cc = asts.cc
@@ -21,6 +26,8 @@ class ThirdPage(object):
         self.confirmButton = None
 
         self.createPage()
+
+        self.colorMembers = [self.root, self.alterButton, self.confirmButton, self.exitButton, self.previewLabel, self.previewPicLabel, self.chooseMaterialLabel]
 
         self.cc.start_lv()
         self.asts.cp = 3
@@ -40,30 +47,46 @@ class ThirdPage(object):
         self.confirmButton = Button(self.root, text='save photos and start scaling', command=self.saveAsIndividualInt)
         self.confirmButton.place(x=600, y=500, width=200, height=40)
 
-        Button(self.root, text='Exit (Not Saving)', command=self.exitNotSaving).place(x=60, y=200, width=200, height=40)
+        self.exitButton = Button(self.root, text='Exit (Not Saving)', command=self.exitNotSaving, bg=self.asts.bgColor if not self.asts.surprise else self.asts.getRandomColor())
+        self.exitButton.place(x=60, y=200, width=200, height=40)
 
-        Label(self.root, text='Preview', bg='black', fg='white').place(x=500, y=60, width=480, height=360)
+        self.previewPicLabel = Label(self.root, name="preview_label", text='Preview', bg=self.asts.bgColor if not self.asts.surprise else self.asts.getRandomColor())
+        self.previewPicLabel.place(x=500, y=90, width=480, height=360)
 
         self.previewLabel = Label(self.root, name="preview_label")
         self.previewLabel.place(x=500, y=90, width=480, height=360)
 
-        Label(self.root, text='Choose Material: ').place(x=60, y=300)
+        self.chooseMaterialLabel = Label(self.root, text='Choose Material: ', bg=self.asts.bgColor if not self.asts.surprise else self.asts.getRandomColor())
+        self.chooseMaterialLabel.place(x=60, y=300)
 
         self.cbox = Combobox(self.root, textvariable=StringVar())
         self.cbox['values'] = ['', 'pottery', 'bone', 'stone', 'pottery seive', 'bone seive', 'stone seive', 'spetial finds']
         self.cbox.current(0)
-        self.cbox.place(x=160, y=300, width=100, height=20)
-        # self.cbox.bind('<<ComboboxSelected>>', self.materialSelected)
+        self.cbox.place(x=180, y=300, width=100, height=20)
+        self.cbox.bind('<<ComboboxSelected>>', self.materialSelected)
 
     def clear(self):
         for w in self.root.winfo_children():
             w.place_forget()
+
+    def SurpriseColorUpdate(self):
+        try:
+            for i in self.colorMembers:
+                try:
+                    i.configure(bg=self.asts.getRandomColor())
+                    i.configure(fg=self.asts.getRandomColor())
+                except:
+                    pass
+        except:
+            pass
 
     def exitNotSaving(self):
         self.clear()
         FirstPage(self.asts, self.rootpath, self.root)
 
     def take(self):
+        if self.asts.surprise:
+            self.SurpriseColorUpdate()
         # turn off live view
         self.cc.stop_lv()
         self.asts.pic_taken = True
@@ -81,6 +104,8 @@ class ThirdPage(object):
             print("retake cap prev fail")
 
     def abort(self):
+        if self.asts.surprise:
+            self.SurpriseColorUpdate()
         # turn on live view
         self.cc.start_lv()
         self.asts.pic_taken = False
@@ -89,6 +114,10 @@ class ThirdPage(object):
         self.confirmButton.configure(state='disabled')
         self.alterButton.configure(text='Take pic and preview')
         self.alterButton.configure(command=self.take)
+
+    def materialSelected(self, a=None):
+        if self.asts.surprise:
+            self.SurpriseColorUpdate()
 
     def saveAsIndividualInt(self):
         self.asts.cp = -1
