@@ -43,10 +43,10 @@ This section is for both hardware and software)
 (workflow)
 &nbsp;
 ## 4.Credits
-* LI Haochen, Harry - Photo uploading function and server synchronization function
-* JIN Yushang, Eric - Photo taking function, livestream and preview function, weight measurement function
-* FAN Zheyu, Uky - GUI backend design, GUI frontend design, logic optimization
-* SONG Yichuan, Tiger - GUI design
+* LI Haochen, Harry - Software, Photo uploading function and server synchronization function
+* JIN Yushang, Eric - Hardware, Photo taking function, livestream and preview function, weight measurement function
+* FAN Zheyu, Uky - Software, GUI backend design, GUI frontend design, logic optimization
+* SONG Yichuan, Tiger - Software, GUI design
 * Special thanks to Gabriel Paul Getzie for helping on test server related issue.
 &nbsp;
 ## 5.Reference
