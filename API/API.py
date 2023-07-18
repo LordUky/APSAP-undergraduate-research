@@ -25,7 +25,7 @@ class API:
             return 0
     
     # find the max find number before post, given other information
-    def get_next_find(self,data:dict):
+    def get_max_find(self,data:dict):
         headers = {'Authorization': f'Token {self.token}'}
         max_num = 0
         start_place = 0
@@ -90,6 +90,6 @@ if __name__ == "__main__":
 
     api = API(base_url)
     api.login(username = username,password = password)
-    max_num = api.get_next_find(data)
+    max_num = api.get_max_find(data)
     print(max_num)
     # api.create_find(data)
