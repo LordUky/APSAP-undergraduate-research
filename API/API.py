@@ -24,6 +24,34 @@ class API:
         else:
             return 0
     
+    # find the max find number before post, given other information
+    def get_next_find(self,data:dict):
+        headers = {'Authorization': f'Token {self.token}'}
+        max_num = 0
+        start_place = 0
+        api_url = self.base_url + "api/find/?limit=100"
+        #find max find_num
+        while True:
+            response = self.session.get(api_url, headers= headers)
+            # check for corresponding value
+            response_data = response.json()
+            for result in response_data["results"]:
+                if result['utm_hemisphere']== data['utm_hemisphere'] and \
+                result['utm_zone']== data['utm_zone'] and \
+                result['area_utm_easting_meters']== data['area_utm_easting_meters'] and \
+                result['area_utm_northing_meters']== data['area_utm_northing_meters'] and \
+                result['context_number']== data['context_number'] and result["find_number"] > max_num:
+                    max_num = result["find_number"]
+            # to next page/stop condition
+            if response_data['next'] == None:
+                break
+            else:
+                # next section
+                start_place += 100
+                api_url = self.base_url + "api/find/?limit=100" + f"&offset={start_place}"
+
+        return max_num    
+    
     # post data into database
     def create_find(self,data:dict):
         headers = {'Authorization': f'Token {self.token}'}
@@ -37,8 +65,7 @@ class API:
         else: 
             print(response.status_code)
             print("Add failed")
-        return response.json()['find_number']
-
+    
 if __name__ == "__main__":
     # test website url
     base_url = "https://j20200007.kotsf.com/asl/"
@@ -62,6 +89,7 @@ if __name__ == "__main__":
     # ('pottery','spout') ('metal','nail')
 
     api = API(base_url)
-    api.login(username=username,password=password)
-    find_num = api.create_find(data)
-    print(find_num)
+    api.login(username = username,password = password)
+    max_num = api.get_next_find(data)
+    print(max_num)
+    # api.create_find(data)
