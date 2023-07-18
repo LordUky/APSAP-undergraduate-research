@@ -1,4 +1,5 @@
 import serial
+import serial.tools.list_ports
 import re
 import openpyxl as pyxl
 import datetime
@@ -15,6 +16,10 @@ class scaleRead:
         self._DEBUG = debug
         if not self._DEBUG:
             self.ser = serial.Serial(serial_port, 9600, timeout=1)
+
+    @staticmethod
+    def detect_ports():
+        return [x.device for x in serial.tools.list_ports.comports()]
 
     def start(self):
         if not self._DEBUG:
@@ -34,6 +39,7 @@ class scaleRead:
         else:
             return self.weight
 
+    @staticmethod
     def write_to_file(self, weight: float, fp: str) -> None:
         wb = pyxl.Workbook()
         ws = wb.active
