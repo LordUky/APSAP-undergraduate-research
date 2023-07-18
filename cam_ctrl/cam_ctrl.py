@@ -8,7 +8,7 @@ import rawpy
 
 
 class cameraControl:
-    _DEBUG = True
+    _DEBUG = False
 
     lv_process = None
     lv_thread = None
@@ -18,7 +18,8 @@ class cameraControl:
     LV_UPDATE_TIMEOUT = 0.5  # second
     LV_UPDATE_CHUNK = 1024  # bytes
 
-    def __init__(self, tmp_dir="/tmp/") -> None:
+    def __init__(self, tmp_dir="/tmp/", debug = False) -> None:
+        self._DEBUG = debug
         # assume tmp_fp is empty
         self.tmp_dir = tmp_dir
         self.count = 0
