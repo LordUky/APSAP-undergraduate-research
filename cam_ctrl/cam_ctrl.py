@@ -18,7 +18,7 @@ class cameraControl:
     LV_UPDATE_TIMEOUT = 0.5  # second
     LV_UPDATE_CHUNK = 1024  # bytes
 
-    def __init__(self, tmp_dir="tmp/", debug = False) -> None:
+    def __init__(self, tmp_dir="tmp", debug = False) -> None:
         self._DEBUG = debug
         # assume tmp_fp is empty
         self.tmp_dir = tmp_dir
@@ -133,7 +133,7 @@ class cameraControl:
             return "cam_ctrl/aaa.jpg"
         # ret = os.system("gphoto2 --capture-image-and-download --filename={} --force-overwrite".format(fp))
         # os.system("cd tmp; gphoto2 --capture-image-and-download --force-overwrite; cd ..; cp tmp/capt0001.cr3 {}")
-        os.system(f"cd {self.tmp_dir}; gphoto2 --capture-image-and-download --force-overwrite; cd ..")
+        os.system(f"cd {self.tmp_dir} && gphoto2 --capture-image-and-download --force-overwrite && cd ..")
         # return jpeg path
         return "tmp/capt0000.jpg"
     
@@ -150,19 +150,30 @@ class cameraControl:
     #         return Image.open(io.BytesIO(thumb.data))
 
 if __name__ == "__main__":
+
     cc = cameraControl()
-    cc.start_lv()
 
-    import time
-    time.sleep(1)
+    def capture_test():
+        input("cap:")
+        cc.capture_image_and_download()
+        fp = input("mov fp: ")
+        cc.copy_tmp_image_to_fp(fp)
 
-    for i in range(100):
-        try:
-            img = cc.get_lv_frame()
-            print(img)
-            img.show()
-        except Exception as e:
-            print(e)
-        finally:
-            time.sleep(1)
-    cc.stop_lv()
+    while True:
+        capture_test()
+
+    # cc.start_lv()
+
+    # import time
+    # time.sleep(1)
+
+    # for i in range(100):
+    #     try:
+    #         img = cc.get_lv_frame()
+    #         print(img)
+    #         img.show()
+    #     except Exception as e:
+    #         print(e)
+    #     finally:
+    #         time.sleep(1)
+    # cc.stop_lv()
