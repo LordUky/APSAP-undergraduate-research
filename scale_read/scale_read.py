@@ -12,6 +12,8 @@ class scaleRead:
     running = False
     weight = -1
 
+    read_t = None
+
     def __init__(self, serial_port, debug=False) -> None:
         self._DEBUG = debug
         if not self._DEBUG:
@@ -23,9 +25,9 @@ class scaleRead:
 
     def start(self):
         if not self._DEBUG:
-            t = threading.Thread(target=self._reading_thread)
+            self.read_t = threading.Thread(target=self._reading_thread)
             self.running = True
-            t.start()
+            self.read_t.start()
 
     def _reading_thread(self):
         while self.running:
@@ -55,8 +57,10 @@ class scaleRead:
         wb.save(fp)
 
     def stop(self):
+        if self._DEBUG:
+            return
         self.running = False
-        time.sleep(1)
+        self.read_t.join()
 
     def __del__(self):
         print("DEL")
