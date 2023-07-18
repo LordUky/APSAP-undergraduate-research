@@ -20,6 +20,8 @@ class SecondPage(object):
 
         self.createPage()
 
+        self.taken = False
+
 
         # cpf = self.cc.capture_preview()
         # print("cpf", cpf)
@@ -33,7 +35,7 @@ class SecondPage(object):
         self.asts.cp = 2
 
     def createPage(self):
-        Button(self.root, text='Take pic and preview', command=self.retake).place(x=60, y=100, width=200, height=40)
+        Button(self.root, text='Take pic and preview', command=self.take).place(x=60, y=100, width=200, height=40)
 
         Button(self.root, text='Exit (Not Saving)', command=self.exitNotSaving).place(x=60, y=200, width=200, height=40)
 
@@ -52,18 +54,17 @@ class SecondPage(object):
         self.clear()
         FirstPage(self.asts, self.rootpath, self.root)
 
-    def retake(self):
-        print('retake reached')
-        cpf = self.cc.capture_preview()
-        print('cpf in retake:', cpf)
-        if cpf:
-            tkim = ImageTk.PhotoImage(file=cpf)
+    def take(self):
+        pv_fp = self.cc.capture_image_and_download()
+        if pv_fp:
+            tkim = ImageTk.PhotoImage(file=pv_fp)
             self.previewLabel["image"] = tkim
             self.previewLabel.image = tkim
         else:
             print("retake cap prev fail")
+        self.taken = True
 
-    def nextSide(self):
+    def confirm(self):
         self.asts.cp = -1
         self.cc.stop_lv()
 

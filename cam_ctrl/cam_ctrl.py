@@ -18,7 +18,7 @@ class cameraControl:
     LV_UPDATE_TIMEOUT = 0.5  # second
     LV_UPDATE_CHUNK = 1024  # bytes
 
-    def __init__(self, tmp_dir="/tmp/", debug = False) -> None:
+    def __init__(self, tmp_dir="tmp/", debug = False) -> None:
         self._DEBUG = debug
         # assume tmp_fp is empty
         self.tmp_dir = tmp_dir
@@ -69,11 +69,13 @@ class cameraControl:
         self.lv_thread.start()
 
     def _update_lv_frame(self):
+        print("Enter update lv frame")
         out_list = []
         while self.lv_update_running:
             out = self.lv_process.stdout.read(self.LV_UPDATE_CHUNK)
             sof_idx = out.find(b"\xff\xd8")
             eof_idx = out.find(b"\xff\xd9")
+            # print("Read", sof_idx, eof_idx)
 
             if eof_idx != -1 and out_list != []:  # end of frame exists, and outlist not empty
                 out_list.append(out[: eof_idx + 2])
@@ -82,8 +84,9 @@ class cameraControl:
                     frame_bytes = frame_bytes.replace(b"\x0d\x0a", b"\x0a")
                 try:
                     self.lv_frame = Image.open(io.BytesIO(frame_bytes))
-                except:
+                except Exception as e:
                     pass
+                    # print("LV DECODE ERR")
                 out_list = []
 
             if sof_idx != -1:  # start of frame exists
@@ -100,56 +103,66 @@ class cameraControl:
     def stop_lv(self):
         if self._DEBUG:
             return
-        if self.lv_process is not None:
-            self.lv_process.kill()
-            self.lv_process = None
         if self.lv_thread is not None:
             self.lv_update_running = False
             self.lv_thread.join()
             self.lv_thread = None
+        if self.lv_process is not None:
+            self.lv_process.kill()
+            print("LV PROC KILLED")
+            self.lv_process = None
 
-    def capture_preview(self) -> str:
-        """
-        If success, return image file path.
-        If fail, return None.
-        """
+    # def capture_preview(self) -> str:
+    #     """
+    #     If success, return image file path.
+    #     If fail, return None.
+    #     """
+    #     if self._DEBUG:
+    #         return "cam_ctrl/aaa.jpg"
+    #     cpf = "{}.jpg".format(self.count)
+    #     if os.system("gphoto2 --capture-preview --filename={} --force-overwrite".format(self.tmp_dir + cpf)) != 0:
+    #         return None
+    #     self.count += 1
+    #     return self.tmp_dir + "thumb_" + cpf
+
+    """
+    Capture cr3 and jpeg to tmp folder, and return path of jpeg
+    """
+    def capture_image_and_download(self):
         if self._DEBUG:
             return "cam_ctrl/aaa.jpg"
-        cpf = "{}.jpg".format(self.count)
-        if os.system("gphoto2 --capture-preview --filename={} --force-overwrite".format(self.tmp_dir + cpf)) != 0:
-            return None
-        self.count += 1
-        return self.tmp_dir + "thumb_" + cpf
+        # ret = os.system("gphoto2 --capture-image-and-download --filename={} --force-overwrite".format(fp))
+        # os.system("cd tmp; gphoto2 --capture-image-and-download --force-overwrite; cd ..; cp tmp/capt0001.cr3 {}")
+        os.system(f"cd {self.tmp_dir}; gphoto2 --capture-image-and-download --force-overwrite; cd ..")
+        # return jpeg path
+        return "tmp/capt0000.jpg"
+    
+    """
+    'Download' the latest cr3 image to fp
+    """
+    def copy_tmp_image_to_fp(self, fp):
+        return os.system("cp tmp/capt0001.cr3 {}".format(fp))
 
-    def capture_image_and_download(self, fp):
-        if self._DEBUG:
-            _cmd = "cp cam_ctrl/aaa.jpg {}".format(fp)
-            print("CP COMMAND:", _cmd)
-            os.system(_cmd)
-            return 0
-        ret = os.system("gphoto2 --capture-image-and-download --filename={} --force-overwrite".format(fp))
-        return ret
-
-    @staticmethod
-    def get_thumb(raw_fp):
-        with rawpy.imread(raw_fp) as raw:
-            thumb = raw.extract_thumb()
-            return Image.open(io.BytesIO(thumb.data))
+    # @staticmethod
+    # def get_thumb(raw_fp):
+    #     with rawpy.imread(raw_fp) as raw:
+    #         thumb = raw.extract_thumb()
+    #         return Image.open(io.BytesIO(thumb.data))
 
 if __name__ == "__main__":
     cc = cameraControl()
     cc.start_lv()
 
     import time
+    time.sleep(1)
 
-    try:
-        for i in range(10):
+    for i in range(100):
+        try:
             img = cc.get_lv_frame()
-            # print(img)
+            print(img)
             img.show()
-            time.sleep(0.5)
-    except Exception as e:
-        print(e)
-        exit()
-    finally:
-        cc.stop_lv()
+        except Exception as e:
+            print(e)
+        finally:
+            time.sleep(1)
+    cc.stop_lv()
