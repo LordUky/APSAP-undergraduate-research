@@ -142,6 +142,7 @@ class FirstPage(object):
             f"{self.pm.root_path}/{self.pm.latitude}/{self.pm.num1}/{self.pm.num2}")
 
     def LogOut(self):
-        from .LoginPage import LoginPage
-        self.clear()
-        LoginPage(self.asts, self.root)
+        self.root.destroy()
+        # from .LoginPage import LoginPage
+        # self.clear()
+        # LoginPage(self.asts, self.root)
