@@ -12,7 +12,7 @@ class assistants():
         self.api = API(self.urlForApi)
         self.rpForPm = r"../photo_folder/N"
         self.pm = gui.models.photo_manager(self.rpForPm)
-        self.cc = cam_ctrl.cameraControl(tmp_dir="../tmp/", debug=False)
+        self.cc = cam_ctrl.cameraControl(tmp_dir="tmp/", debug=False)
         self.sr = None
         self.cp = 0  # current page. 0:login; 1:firstPage; ......
         self.fc = {'combo1': None, 'combo2': None, 'combo3': None, 'combo4': None}

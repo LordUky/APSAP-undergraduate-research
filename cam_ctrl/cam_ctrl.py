@@ -4,7 +4,6 @@ from PIL import Image
 import io
 import platform
 import threading
-import rawpy
 
 
 class cameraControl:
