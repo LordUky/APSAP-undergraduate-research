@@ -17,13 +17,13 @@ This project intergrates photo taking, photo uploading and database synchronizat
 * [5.Reference](##5Reference)
 &nbsp;
 ## 1.Installation 
+The program can be installed by both flash disk and onedrive download.
 ### 1.1 Installation from FLASH DISK/Onedrive
-Install by copy and paste the whole project folder from Flash Disk/Onedrive, then it is good to go. All dependencies should be included.
+Install by copy and paste the whole project folder from Flash Disk/Onedrive, then it is good to go. All dependencies should be included. If you are downloading from onedrive, extract the folder to target destination. 
 ### 1.2 Installation from Biginning
 #### Install MSYS2
 Follow the msys2 official site:
 [https://www.msys2.org/wiki/MSYS2-installation/](https://www.msys2.org/wiki/MSYS2-installation/)
-
 #### Install dependencies
 ```bash
 # gphoto2 and python
@@ -38,7 +38,6 @@ pacman -S mingw-w64-x86_64-python-openpyxl
 # requests for connecting to server
 pacman -S mingw-w64-x86_64-python-requests
 ```
-
 #### Obtain `.pyc` executable from Internet
 __to be done__
 
@@ -49,9 +48,7 @@ This section is for both hardware and software)
 * Canon Camera
   * Connect charging cable to camera and usb-micro_usb cable to computer.
   * Make sure SD card is in the camera.
-  * Change to manual focus: menu -> shooting settings -> 6 -> Focus mode to "MF".
-  * After setting up the camera, manually focus the camera to the plate until you can see the words on color board most clearly.
-  * To restore the setting, change focus mode to "AF".
+  * Make sure Camera is horizontal (as well as plate)
 * Electronic Scale
   * Connect cable with computer and scale
   * Continuous signal setting: press "ON/OFF" -> when starting (loading 999999 to 111111)(see reference 5.3) -> press "TARE" "TARE" "TARE" and "UNIT" -> it should be showing "01-Diu" -> press "Zero" until it shows "09-Ode" -> Press "CAL/PRT" to confirm-> Press "ZERO" until it shows "3" -> Press "CAL/PRT" to confirm -> Turn off the scale and open it, it should be set.
@@ -64,7 +61,7 @@ This section is for both hardware and software)
 [Demo video]()
 &nbsp;
 ## 4.Credits
-* LI Haochen, Harry - Software, Photo uploading function and server synchronization function
+* LI Haochen, Harry - Software, photo uploading function and server API
 * JIN Yushang, Eric - Hardware, Photo taking function, livestream and preview function, weight measurement function
 * FAN Zheyu, Uky - Software, GUI backend design, GUI frontend design, logic optimization
 * SONG Yichuan, Tiger - Software, GUI design
