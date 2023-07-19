@@ -26,10 +26,17 @@ Follow the msys2 official site:
 
 #### Install dependencies
 ```bash
+# gphoto2 and python
 pacman -S mingw-w64-x86_64-gphoto2
 pacman -S mingw-w64-x86_64-python
+# PIL for image processing
 pacman -S mingw-w64-x86_64-python-pillow
-pacman -S mingw-w64-x86_64-python3-pyserial
+# serial for reading scale
+pacman -S mingw-w64-x86_64-python-pyserial
+# pyxl for writing weight to excel
+pacman -S mingw-w64-x86_64-python-openpyxl
+# requests for connecting to server
+pacman -S mingw-w64-x86_64-python-requests
 ```
 
 #### Obtain `.pyc` executable from Internet
