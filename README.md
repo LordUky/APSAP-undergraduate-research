@@ -28,7 +28,7 @@ Follow the msys2 official site:
 ```bash
 # gphoto2 and python
 pacman -S mingw-w64-x86_64-gphoto2
-pacman -S mingw-w64-x86_64-python
+pacman -S mingw-w64-x86_64-python3.10
 # PIL for image processing
 pacman -S mingw-w64-x86_64-python-pillow
 # serial for reading scale
