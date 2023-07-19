@@ -11,8 +11,6 @@ import logging
 
 class ThirdPage(object):
     def __init__(self, asts=None, rp=r"D:/ararat/data/files/N", r=None):
-        self.chooseMaterialLabel = None
-        self.cbox = None
         self.previewPicLabel = None
         self.previewLabel = None
         self.exitButton = None
@@ -27,7 +25,7 @@ class ThirdPage(object):
 
         self.createPage()
 
-        self.colorMembers = [self.root, self.alterButton, self.confirmButton, self.exitButton, self.previewLabel, self.previewPicLabel, self.chooseMaterialLabel]
+        self.colorMembers = [self.root, self.alterButton, self.confirmButton, self.exitButton, self.previewLabel, self.previewPicLabel]
 
         self.cc.start_lv()
         self.asts.cp = 3
@@ -56,14 +54,6 @@ class ThirdPage(object):
         self.previewLabel = Label(self.root, name="preview_label")
         self.previewLabel.place(x=500, y=90, width=480, height=360)
 
-        self.chooseMaterialLabel = Label(self.root, text='Choose Material: ', bg=self.asts.bgColor if not self.asts.surprise else self.asts.getRandomColor())
-        self.chooseMaterialLabel.place(x=60, y=300)
-
-        self.cbox = Combobox(self.root, textvariable=StringVar())
-        self.cbox['values'] = ['', 'pottery', 'bone', 'stone', 'pottery seive', 'bone seive', 'stone seive', 'spetial finds']
-        self.cbox.current(0)
-        self.cbox.place(x=180, y=300, width=100, height=20)
-        self.cbox.bind('<<ComboboxSelected>>', self.materialSelected)
 
     def clear(self):
         for w in self.root.winfo_children():
@@ -91,7 +81,7 @@ class ThirdPage(object):
         self.cc.stop_lv()
         self.asts.pic_taken = True
         time.sleep(0.1)
-        
+
         self.confirmButton.configure(state='normal')
         self.alterButton.configure(text='abort')
         self.alterButton.configure(command=self.abort)
@@ -110,14 +100,10 @@ class ThirdPage(object):
         self.cc.start_lv()
         self.asts.pic_taken = False
         time.sleep(0.1)
-        
+
         self.confirmButton.configure(state='disabled')
         self.alterButton.configure(text='Take pic and preview')
         self.alterButton.configure(command=self.take)
-
-    def materialSelected(self, a=None):
-        if self.asts.surprise:
-            self.SurpriseColorUpdate()
 
     def saveAsIndividualInt(self):
         self.asts.cp = -1
@@ -134,10 +120,7 @@ class ThirdPage(object):
         # else:
         #     os.makedirs((f"{self.pm.root_path}/{self.pm._latitude}/{self.pm._num1}/{self.pm._num2}/{self.pm.context}/finds/individual/1"))
 
-        dir_list = self.pm.find_sub_dir(
-            f"{self.pm.root_path}/{self.pm._latitude}/{self.pm._num1}/{self.pm._num2}/{self.pm.context}/finds/individual/")
-
-        fp_parent = f"{self.pm.root_path}/{self.pm._latitude}/{self.pm._num1}/{self.pm._num2}/{self.pm.context}/finds/individual/{self.asts.api.get_max_find()+1}"
+        fp_parent = f"{self.pm.root_path}/{self.pm._latitude}/{self.pm._num1}/{self.pm._num2}/{self.pm.context}/finds/individual/{self.asts.api.get_max_find({'utm_hemisphere': 'N', 'utm_zone': self.pm.latitude, 'area_utm_easting_meters': self.pm.num1, 'area_utm_northing_meters': self.pm.num2, 'context_number': self.pm.context}) + 1}"
         fp = fp_parent + "/photos/2.cr3"
 
         self.cc.copy_tmp_image_to_fp(fp)

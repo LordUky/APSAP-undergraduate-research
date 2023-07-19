@@ -103,8 +103,8 @@ if __name__ == "__main__":
         'context_number': 1,
         'material': 'pottery',  # user input
         'category': 'body',  # user input
-        'weight_grams':111.1, # string/number with 1 decimal place
-        'volume_millimeter_cubed':None # put none at collecting stage
+        'weight_grams': 111.1,  # string/number with 1 decimal place
+        'volume_millimeter_cubed': None  # put none at collecting stage
     }
     # list of material and category combinations (material,catgegory)
     # ('pottery','body') ('pottery','rim') ('pottery','base') ('pottery','handle')

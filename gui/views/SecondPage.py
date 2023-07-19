@@ -112,7 +112,8 @@ class SecondPage(object):
         from .ThirdPage import ThirdPage
         self.clear()
 
-        new_dir = f"{self.pm.root_path}/{self.pm._latitude}/{self.pm._num1}/{self.pm._num2}/{self.pm.context}/finds/individual/{self.asts.api.get_max_find()+1}/photos"
+        new_dir = f"{self.pm.root_path}/{self.pm._latitude}/{self.pm._num1}/{self.pm._num2}/{self.pm.context}/finds/individual/{self.asts.api.get_max_find({'utm_hemisphere': 'N', 'utm_zone': self.pm.latitude, 'area_utm_easting_meters': self.pm.num1, 'area_utm_northing_meters': self.pm.num2, 'context_number': self.pm.context})+1}/photos"
+        print('max+1=', self.asts.api.get_max_find({'utm_hemisphere': 'N', 'utm_zone': self.pm.latitude, 'area_utm_easting_meters': self.pm.num1, 'area_utm_northing_meters': self.pm.num2, 'context_number': self.pm.context})+1)
         if not os.path.exists(new_dir):
             os.makedirs(new_dir)
 
