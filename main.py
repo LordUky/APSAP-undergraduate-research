@@ -8,8 +8,10 @@ from API.API import API
 
 class assistants():
     def __init__(self) -> None:
-        self.api = API("https://j20200007.kotsf.com/asl/")
-        self.pm = gui.models.photo_manager(r"../photo_folder/N")
+        self.urlForApi = "https://j20200007.kotsf.com/asl/"
+        self.api = API(self.urlForApi)
+        self.rpForPm = r"../photo_folder/N"
+        self.pm = gui.models.photo_manager(self.rpForPm)
         self.cc = cam_ctrl.cameraControl(tmp_dir="../tmp/", debug=False)
         self.sr = None
         self.cp = 0  # current page. 0:login; 1:firstPage; ......
