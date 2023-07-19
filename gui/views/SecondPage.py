@@ -2,6 +2,7 @@ import tkinter, os
 from tkinter import *
 from tkinter import ttk
 from tkinter.messagebox import *
+import tkinter.font as tkFont
 from .FirstPage import *
 from PIL import ImageTk  # ImageTk needs to be installed separately
 from cam_ctrl import cam_ctrl
@@ -40,6 +41,10 @@ class SecondPage(object):
         self.asts.pic_taken = False
 
     def createPage(self):
+
+        fontStyle = tkFont.Font(family="Lucida Grande", size=30)
+        Label(self.root, text='Page: 2 (photo1)', fg='white', bg='black', font=fontStyle).place(x=0,  y=550, width=400, height=50)
+
         self.alterButton = Button(self.root, text='Take pic and preview', command=self.take, bg=self.asts.bgColor if not self.asts.surprise else self.asts.getRandomColor())
         self.alterButton.place(x=60, y=100, width=200, height=40)
 
@@ -112,26 +117,9 @@ class SecondPage(object):
         from .ThirdPage import ThirdPage
         self.clear()
 
-        if os.path.exists(
-                f"{self.pm.root_path}/{self.pm._latitude}/{self.pm._num1}/{self.pm._num2}/{self.pm.context}/finds/individual/1/photos"
-        ):
-            # new_dir = f"{self.pm.root_path}/{self.pm._latitude}/{self.pm._num1}/{self.pm._num2}/{self.pm.context}/finds/individual/" + str(int(self.pm.find_sub_dir(f"{self.pm.root_path}/{self.pm._latitude}/{self.pm._num1}/{self.pm._num2}/{self.pm.context}/finds/individual/")[-1])+1)
-            dir_list = self.pm.find_sub_dir(
-                f"{self.pm.root_path}/{self.pm._latitude}/{self.pm._num1}/{self.pm._num2}/{self.pm.context}/finds/individual/")
-            if os.path.exists(
-                    f"{self.pm.root_path}/{self.pm._latitude}/{self.pm._num1}/{self.pm._num2}/{self.pm.context}/finds/individual/" + str(
-                        max([int(x) for x in dir_list])) + "/photos/2.cr3"):
-                new_dir = f"{self.pm.root_path}/{self.pm._latitude}/{self.pm._num1}/{self.pm._num2}/{self.pm.context}/finds/individual/" + str(
-                    max([int(x) for x in dir_list]) + 1) + "/photos"
-                os.makedirs(new_dir)
-            else:
-                new_dir = f"{self.pm.root_path}/{self.pm._latitude}/{self.pm._num1}/{self.pm._num2}/{self.pm.context}/finds/individual/" + str(
-                    max([int(x) for x in dir_list])) + "/photos"
-
-            print("2nd page new dir:", new_dir)
-
-        else:
-            new_dir = f"{self.pm.root_path}/{self.pm._latitude}/{self.pm._num1}/{self.pm._num2}/{self.pm.context}/finds/individual/1/photos"
+        new_dir = f"{self.pm.root_path}/{self.pm._latitude}/{self.pm._num1}/{self.pm._num2}/{self.pm.context}/finds/individual/{self.asts.api.get_max_find({'utm_hemisphere': 'N', 'utm_zone': self.pm.latitude, 'area_utm_easting_meters': self.pm.num1, 'area_utm_northing_meters': self.pm.num2, 'context_number': self.pm.context})+1}/photos"
+        print('max+1=', self.asts.api.get_max_find({'utm_hemisphere': 'N', 'utm_zone': self.pm.latitude, 'area_utm_easting_meters': self.pm.num1, 'area_utm_northing_meters': self.pm.num2, 'context_number': self.pm.context})+1)
+        if not os.path.exists(new_dir):
             os.makedirs(new_dir)
 
         self.cc.copy_tmp_image_to_fp(new_dir + "/1.cr3")

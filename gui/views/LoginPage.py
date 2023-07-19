@@ -11,8 +11,8 @@ class LoginPage(object):
         self.pm = self.asts.pm
         self.root = r  # r: Tk()
         self.root.geometry('%dx%d' % (300, 250))  # 设置窗口大小
-        self.username = StringVar()
-        self.password = StringVar()
+        self.username = StringVar(value='autophoto')
+        self.password = StringVar(value='Armenia1')
         self.portCombo = None
         self.page = Frame(self.root)  # 创建Frame
         self.page.configure(bg=self.asts.bgColor)

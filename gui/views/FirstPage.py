@@ -2,7 +2,9 @@ import random
 import tkinter
 from tkinter import *
 from tkinter.ttk import Combobox
+import tkinter.font as tkFont
 from tkinter.messagebox import askyesno
+import os
 
 
 class FirstPage(object):
@@ -36,6 +38,9 @@ class FirstPage(object):
         self.colorMembers = [self.root, self.NLabel, self.EastingLabel, self.NorthingLabel, self.ContextNumberLabel, self.PreviewPicLabel]
 
     def createPage(self):
+
+        fontStyle = tkFont.Font(family="Lucida Grande", size=30)
+        Label(self.root, text='Page: 1 (config)', fg='white', bg='black', font=fontStyle).place(x=0,  y=550, width=400, height=50)
 
         # Label(self.root, text='current root path: ', anchor='w').place(x=20, y=0, width=20, height=20)
         if self.asts.surprise:
@@ -126,8 +131,8 @@ class FirstPage(object):
         self.combo4['state'] = 'readonly'
         # self.combo4['values'] = ['create new'] + self.pm.find_sub_dir(
         #     f"{self.pm.root_path}/{self.pm.latitude}/{self.pm.num1}/{self.pm.num2}")
-        self.combo4['values'] = self.pm.find_sub_dir(
-            f"{self.pm.root_path}/{self.pm.latitude}/{self.pm.num1}/{self.pm.num2}")
+        self.combo4['values'] = self.asts.api.get_context_list({'utm_hemisphere': 'N', 'utm_zone': self.pm.latitude, 'area_utm_easting_meters': self.pm.num1, 'area_utm_northing_meters': self.pm.num2})
+        print(self.combo4['values'], type(self.combo4['values']))
         return
 
     def comcmd4(self, a=None):
@@ -148,6 +153,10 @@ class FirstPage(object):
             self.asts.fc['combo4'] = self.combovar4.get()
         self.pm.context = self.combovar4.get()
         self.newPicButton['state'] = 'active'
+        # print(os.listdir(os.path.curdir))
+        # print(f"{self.pm.root_path}/{self.pm.latitude}/{self.pm.num1}/{self.pm.num2}/{self.pm.context}")
+        if not os.path.exists(f"{self.pm.root_path}/{self.pm.latitude}/{self.pm.num1}/{self.pm.num2}/{self.pm.context}"):
+            os.makedirs(f"{self.pm.root_path}/{self.pm.latitude}/{self.pm.num1}/{self.pm.num2}/{self.pm.context}/finds/individual")
         return
 
     def clear(self):
@@ -159,7 +168,7 @@ class FirstPage(object):
             self.SurpriseColorUpdate()
             a = random.random()
             if a < 0.6:
-                self.newPicButton.place(x=100*random.random(), y=300*random.random() + 200)
+                self.newPicButton.place(x=100 * random.random(), y=300 * random.random() + 200)
                 return
         from .SecondPage import SecondPage
         self.clear()

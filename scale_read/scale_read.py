@@ -37,7 +37,8 @@ class scaleRead:
 
     def read(self) -> float:
         if self._DEBUG:
-            return round(time.time(), 2)
+            # return round(time.time(), 2)
+            return float('{:.2f}'.format(round(time.time(), 2) % 200))
         else:
             return self.weight
 
