@@ -2,6 +2,7 @@ import random
 import tkinter
 from tkinter import *
 from tkinter.ttk import Combobox
+import tkinter.font as tkFont
 from tkinter.messagebox import askyesno
 import os
 
@@ -37,6 +38,9 @@ class FirstPage(object):
         self.colorMembers = [self.root, self.NLabel, self.EastingLabel, self.NorthingLabel, self.ContextNumberLabel, self.PreviewPicLabel]
 
     def createPage(self):
+
+        fontStyle = tkFont.Font(family="Lucida Grande", size=30)
+        Label(self.root, text='Page: 1 (config)', fg='white', bg='black', font=fontStyle).place(x=0,  y=550, width=400, height=50)
 
         # Label(self.root, text='current root path: ', anchor='w').place(x=20, y=0, width=20, height=20)
         if self.asts.surprise:

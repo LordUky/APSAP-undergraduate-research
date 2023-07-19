@@ -2,6 +2,7 @@ import tkinter, os
 from tkinter import *
 from tkinter import ttk
 from tkinter.messagebox import *
+import tkinter.font as tkFont
 from .FirstPage import *
 from PIL import ImageTk
 import logging
@@ -28,8 +29,8 @@ class FourthPage(object):
         self.asts.cp = 4
 
         self.cboxVar = StringVar()
-        self.material = ''
-        self.category = ''
+        self.material = '?'
+        self.category = '?'
         self.weight = -1
 
         self.createPage()
@@ -37,6 +38,10 @@ class FourthPage(object):
         self.colorMembers = [self.root, self.sampleButton, self.sampleLabel, self.weightLabel, self.chooseMaterialLabel, self.uploadButton, self.materialLabel, self.categoryLabel]
 
     def createPage(self):
+
+        fontStyle = tkFont.Font(family="Lucida Grande", size=30)
+        Label(self.root, text='Page: 1 (others_and_upload)', fg='white', bg='black', font=fontStyle).place(x=0,  y=550, width=600, height=50)
+
         self.sampleButton = Button(self.root, text='Sample', command=self.sample, bg=self.asts.bgColor if not self.asts.surprise else self.asts.getRandomColor(), activebackground='black', activeforeground='white')
         self.sampleButton.place(x=60, y=200, width=200, height=40)
         self.sampleLabel = Label(self.root, text='', bg=self.asts.bgColor if not self.asts.surprise else self.asts.getRandomColor())
@@ -53,8 +58,8 @@ class FourthPage(object):
         self.chooseMaterialLabel = Label(self.root, text='Choose Material: ', bg=self.asts.bgColor if not self.asts.surprise else self.asts.getRandomColor())
         self.chooseMaterialLabel.place(x=60, y=300)
 
-        self.cbox = Combobox(self.root, textvariable=self.cboxVar)
-        self.cbox['values'] = [(), ('pottery', 'body'), ('pottery', 'rim'), ('pottery', 'base'), ('pottery', 'handle'), ('pottery', 'spout'), ('metal', 'nail')]
+        self.cbox = Combobox(self.root, textvariable=self.cboxVar, state='readonly')
+        self.cbox['values'] = ['? ?'] + self.asts.api.get_combination()
         self.cbox.current(0)
         self.cbox.place(x=180, y=300, width=100, height=20)
         self.cbox.bind('<<ComboboxSelected>>', self.materialSelected)
@@ -63,10 +68,11 @@ class FourthPage(object):
         if self.asts.surprise:
             self.SurpriseColorUpdate()
         material_and_category = self.cboxVar.get().split()
-        self.material = 'material='+material_and_category[0]
-        self.category = 'category='+material_and_category[1]
-        self.materialLabel['text'] = self.material
-        self.categoryLabel['text'] = self.category
+        print(material_and_category)
+        self.material = material_and_category[0]
+        self.category = material_and_category[1]
+        self.materialLabel['text'] = 'material='+material_and_category[0]
+        self.categoryLabel['text'] = 'category='+material_and_category[1]
 
         self.checkAllSet()
 
@@ -100,10 +106,8 @@ class FourthPage(object):
 
     def confirmAndUplaod(self):
 
-
         self.sr.stop()
         self.sr.write_to_file(self.weight, self.fp_parent + "/a.xlsx")
-
 
         oneDecimalWeight = float('{:.1f}'.format(self.weight))
         data = {
@@ -117,12 +121,19 @@ class FourthPage(object):
             'weight_grams': oneDecimalWeight,  # string/number with 1 decimal place
             'volume_millimeter_cubed': None  # put none at collecting stage
         }
-        self.asts.api.create_find(data)
+        status = self.asts.api.create_find(data)
+        if status:
+            self.clear()
+            FirstPage(self.asts, self.rootpath, self.root)
+        else:
+            self.categoryLabel['text'] = 'UPLOAD FAILED!'
+            self.materialLabel['text'] = 'UPLOAD FAILED!'
+            self.sampleLabel['text'] = 'UPLOAD FAILED!'
 
-        FirstPage(self.asts, self.rootpath, self.root)
 
     def checkAllSet(self):
-        if self.material == '' or self.category == '' or self.weight == -1:
+        print(self.material, self.category, self.weight)
+        if self.material == '?' or self.category == '?' or self.weight == -1:
             self.uploadButton.configure(state='disabled')
         else:
-            self.uploadButton.configure(state='active')
+            self.uploadButton.configure(state='normal')

@@ -2,6 +2,7 @@ import tkinter, os
 from tkinter import *
 from tkinter import ttk
 from tkinter.messagebox import *
+import tkinter.font as tkFont
 from .FourthPage import *
 from PIL import ImageTk
 import time
@@ -39,6 +40,10 @@ class ThirdPage(object):
         #     self.previewLabel["image"] = tkim
 
     def createPage(self):
+
+        fontStyle = tkFont.Font(family="Lucida Grande", size=30)
+        Label(self.root, text='Page: 1 (photo2)', fg='white', bg='black', font=fontStyle).place(x=0,  y=550, width=400, height=50)
+
         self.alterButton = Button(self.root, text='Take pic and preview', command=self.take)
         self.alterButton.place(x=60, y=100, width=200, height=40)
 

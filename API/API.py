@@ -93,9 +93,11 @@ class API:
 
         if response.status_code == 201:
             print("New finds added")
+            return True
         else:
             print(response.status_code)
             print("Add failed")
+            return False
 
 
 if __name__ == "__main__":
