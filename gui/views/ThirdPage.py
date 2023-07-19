@@ -4,7 +4,7 @@ from tkinter import ttk
 from tkinter.messagebox import *
 import tkinter.font as tkFont
 from .FourthPage import *
-from PIL import ImageTk
+from PIL import ImageTk, Image
 import time
 
 import logging
@@ -92,9 +92,10 @@ class ThirdPage(object):
         self.alterButton.configure(command=self.abort)
         pv_fp = self.cc.capture_image_and_download()
         if pv_fp:
-            tkim = ImageTk.PhotoImage(file=pv_fp)
-            self.previewLabel["image"] = tkim
-            self.previewLabel.image = tkim
+            imgopen = Image.open(pv_fp).resize((480, 320))
+            tkim = ImageTk.PhotoImage(imgopen)
+            self.previewPicLabel["image"] = tkim
+            self.previewPicLabel.image = tkim
         else:
             print("retake cap prev fail")
 

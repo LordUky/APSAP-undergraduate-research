@@ -92,7 +92,7 @@ class SecondPage(object):
         self.alterButton.configure(command=self.abort)
         pv_fp = self.cc.capture_image_and_download()
         if pv_fp:
-            imgopen = Image.open(pv_fp).resize((480, 360))
+            imgopen = Image.open(pv_fp).resize((480, 320))
             tkim = ImageTk.PhotoImage(imgopen)
             self.previewPicLabel["image"] = tkim
             self.previewPicLabel.image = tkim
