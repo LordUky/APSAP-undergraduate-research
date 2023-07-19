@@ -100,9 +100,11 @@ if __name__ == "__main__":
         'utm_zone': 38,
         'area_utm_easting_meters': 478230,
         'area_utm_northing_meters': 4419430,
-        'context_number': 2,
+        'context_number': 1,
         'material': 'pottery',  # user input
-        'category': 'rim'  # user input
+        'category': 'body',  # user input
+        'weight_grams':114.5, # string/number with 1 decimal place
+        'volume_millimeter_cubed':None # put none at collecting stage
     }
     # list of material and category combinations (material,catgegory)
     # ('pottery','body') ('pottery','rim') ('pottery','base') ('pottery','handle')
@@ -112,5 +114,5 @@ if __name__ == "__main__":
     api.login(username=username, password=password)
     # max_num = api.get_max_find(data)
     # print(max_num)
-    # api.create_find(data)
-    print(api.get_context_list(data))
+    api.create_find(data)
+    # print(api.get_context_list(data))
