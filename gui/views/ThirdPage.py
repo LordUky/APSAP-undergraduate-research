@@ -137,11 +137,8 @@ class ThirdPage(object):
         dir_list = self.pm.find_sub_dir(
             f"{self.pm.root_path}/{self.pm._latitude}/{self.pm._num1}/{self.pm._num2}/{self.pm.context}/finds/individual/")
 
-        fp_parent = f"{self.pm.root_path}/{self.pm._latitude}/{self.pm._num1}/{self.pm._num2}/{self.pm.context}/finds/individual/" + str(
-            max([int(x) for x in dir_list]))
+        fp_parent = f"{self.pm.root_path}/{self.pm._latitude}/{self.pm._num1}/{self.pm._num2}/{self.pm.context}/finds/individual/{self.asts.api.get_max_find()+1}"
         fp = fp_parent + "/photos/2.cr3"
-
-        print(fp)
 
         self.cc.copy_tmp_image_to_fp(fp)
 

@@ -149,8 +149,10 @@ class FirstPage(object):
             self.asts.fc['combo4'] = self.combovar4.get()
         self.pm.context = self.combovar4.get()
         self.newPicButton['state'] = 'active'
+        # print(os.listdir(os.path.curdir))
+        # print(f"{self.pm.root_path}/{self.pm.latitude}/{self.pm.num1}/{self.pm.num2}/{self.pm.context}")
         if not os.path.exists(f"{self.pm.root_path}/{self.pm.latitude}/{self.pm.num1}/{self.pm.num2}/{self.pm.context}"):
-            os.mkdir(f"{self.pm.root_path}/{self.pm.latitude}/{self.pm.num1}/{self.pm.num2}/{self.pm.context}/finds/individual")
+            os.makedirs(f"{self.pm.root_path}/{self.pm.latitude}/{self.pm.num1}/{self.pm.num2}/{self.pm.context}/finds/individual")
         return
 
     def clear(self):

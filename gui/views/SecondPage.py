@@ -112,26 +112,8 @@ class SecondPage(object):
         from .ThirdPage import ThirdPage
         self.clear()
 
-        if os.path.exists(
-                f"{self.pm.root_path}/{self.pm._latitude}/{self.pm._num1}/{self.pm._num2}/{self.pm.context}/finds/individual/1/photos"
-        ):
-            # new_dir = f"{self.pm.root_path}/{self.pm._latitude}/{self.pm._num1}/{self.pm._num2}/{self.pm.context}/finds/individual/" + str(int(self.pm.find_sub_dir(f"{self.pm.root_path}/{self.pm._latitude}/{self.pm._num1}/{self.pm._num2}/{self.pm.context}/finds/individual/")[-1])+1)
-            dir_list = self.pm.find_sub_dir(
-                f"{self.pm.root_path}/{self.pm._latitude}/{self.pm._num1}/{self.pm._num2}/{self.pm.context}/finds/individual/")
-            if os.path.exists(
-                    f"{self.pm.root_path}/{self.pm._latitude}/{self.pm._num1}/{self.pm._num2}/{self.pm.context}/finds/individual/" + str(
-                        max([int(x) for x in dir_list])) + "/photos/2.cr3"):
-                new_dir = f"{self.pm.root_path}/{self.pm._latitude}/{self.pm._num1}/{self.pm._num2}/{self.pm.context}/finds/individual/" + str(
-                    max([int(x) for x in dir_list]) + 1) + "/photos"
-                os.makedirs(new_dir)
-            else:
-                new_dir = f"{self.pm.root_path}/{self.pm._latitude}/{self.pm._num1}/{self.pm._num2}/{self.pm.context}/finds/individual/" + str(
-                    max([int(x) for x in dir_list])) + "/photos"
-
-            print("2nd page new dir:", new_dir)
-
-        else:
-            new_dir = f"{self.pm.root_path}/{self.pm._latitude}/{self.pm._num1}/{self.pm._num2}/{self.pm.context}/finds/individual/1/photos"
+        new_dir = f"{self.pm.root_path}/{self.pm._latitude}/{self.pm._num1}/{self.pm._num2}/{self.pm.context}/finds/individual/{self.asts.api.get_max_find()+1}/photos"
+        if not os.path.exists(new_dir):
             os.makedirs(new_dir)
 
         self.cc.copy_tmp_image_to_fp(new_dir + "/1.cr3")

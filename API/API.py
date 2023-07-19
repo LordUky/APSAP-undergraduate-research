@@ -37,12 +37,12 @@ class API:
             # check for corresponding value
             response_data = response.json()
             for result in response_data["results"]:
-                if result['utm_hemisphere'] == data['utm_hemisphere'] and \
-                        result['utm_zone'] == data['utm_zone'] and \
-                        result['area_utm_easting_meters'] == data['area_utm_easting_meters'] and \
-                        result['area_utm_northing_meters'] == data['area_utm_northing_meters'] and \
-                        result['context_number'] == data['context_number'] and result["find_number"] > max_num:
-                    max_num = result["find_number"]
+                if str(result['utm_hemisphere']) == str(data['utm_hemisphere']) and \
+                        str(result['utm_zone']) == str(data['utm_zone']) and \
+                        str(result['area_utm_easting_meters']) == str(data['area_utm_easting_meters']) and \
+                        str(result['area_utm_northing_meters']) == str(data['area_utm_northing_meters']) and \
+                        str(result['context_number']) == data['context_number'] and int(result["find_number"]) > max_num:
+                    max_num = int(result["find_number"])
             # to next page/stop condition
             if response_data['next'] == None:
                 break
