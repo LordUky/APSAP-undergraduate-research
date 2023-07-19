@@ -4,7 +4,7 @@ from tkinter import ttk
 from tkinter.messagebox import *
 import tkinter.font as tkFont
 from .FirstPage import *
-from PIL import ImageTk  # ImageTk needs to be installed separately
+from PIL import ImageTk, Image  # ImageTk needs to be installed separately
 from cam_ctrl import cam_ctrl
 import time
 
@@ -43,7 +43,7 @@ class SecondPage(object):
     def createPage(self):
 
         fontStyle = tkFont.Font(family="Lucida Grande", size=30)
-        Label(self.root, text='Page: 2 (photo1)', fg='white', bg='black', font=fontStyle).place(x=0,  y=550, width=400, height=50)
+        Label(self.root, text='Page2/4 (photo1)', fg='white', bg='black', font=fontStyle).place(x=0,  y=550, width=400, height=50)
 
         self.alterButton = Button(self.root, text='Take pic and preview', command=self.take, bg=self.asts.bgColor if not self.asts.surprise else self.asts.getRandomColor())
         self.alterButton.place(x=60, y=100, width=200, height=40)
@@ -92,7 +92,8 @@ class SecondPage(object):
         self.alterButton.configure(command=self.abort)
         pv_fp = self.cc.capture_image_and_download()
         if pv_fp:
-            tkim = ImageTk.PhotoImage(file=pv_fp)
+            imgopen = Image.open(pv_fp).resize((480, 360))
+            tkim = ImageTk.PhotoImage(imgopen)
             self.previewPicLabel["image"] = tkim
             self.previewPicLabel.image = tkim
         else:

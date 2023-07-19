@@ -42,12 +42,12 @@ class ThirdPage(object):
     def createPage(self):
 
         fontStyle = tkFont.Font(family="Lucida Grande", size=30)
-        Label(self.root, text='Page: 1 (photo2)', fg='white', bg='black', font=fontStyle).place(x=0,  y=550, width=400, height=50)
+        Label(self.root, text='Page3/4 (photo2)', fg='white', bg='black', font=fontStyle).place(x=0,  y=550, width=400, height=50)
 
         self.alterButton = Button(self.root, text='Take pic and preview', command=self.take)
         self.alterButton.place(x=60, y=100, width=200, height=40)
 
-        self.confirmButton = Button(self.root, text='save photos and start scaling', command=self.saveAsIndividualInt)
+        self.confirmButton = Button(self.root, text='save photos and start scaling', command=self.saveAsIndividualInt, state='disabled')
         self.confirmButton.place(x=600, y=500, width=200, height=40)
 
         self.exitButton = Button(self.root, text='Exit (Not Saving)', command=self.exitNotSaving, bg=self.asts.bgColor if not self.asts.surprise else self.asts.getRandomColor())
