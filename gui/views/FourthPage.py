@@ -40,7 +40,7 @@ class FourthPage(object):
     def createPage(self):
 
         fontStyle = tkFont.Font(family="Lucida Grande", size=30)
-        Label(self.root, text='Page: 1 (others_and_upload)', fg='white', bg='black', font=fontStyle).place(x=0,  y=550, width=600, height=50)
+        Label(self.root, text='Page4/4 (others_and_upload)', fg='white', bg='black', font=fontStyle).place(x=0,  y=550, width=600, height=50)
 
         self.sampleButton = Button(self.root, text='Sample', command=self.sample, bg=self.asts.bgColor if not self.asts.surprise else self.asts.getRandomColor(), activebackground='black', activeforeground='white')
         self.sampleButton.place(x=60, y=200, width=200, height=40)
