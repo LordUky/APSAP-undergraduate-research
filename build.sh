@@ -7,12 +7,16 @@ fi
 
 python3 -m compileall .
 
-for x in `find -name "__pycache__" -type d`
+for x in `find -name "*.cpython-310.pyc" -type f`
 do
-    mkdir -p build/$x
-    cp $x/* build/$x/
-    cp $x/../__init__.py build/$x/../
+    newdir=`dirname $(dirname "build/$x")`
+    dest=`dirname $(dirname "build/$x")`/$(basename ${x/cpython-310\.})
+    mkdir -p $newdir
+    cp $x $dest
 done
 
-mv build/__pycache__/main.cpython-310.pyc build/
+
+
+# mv build/__pycache__/main.cpython-310.pyc build/
+
 
