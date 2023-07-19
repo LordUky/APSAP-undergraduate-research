@@ -33,6 +33,7 @@ class scaleRead:
         while self.running:
             # print("rt", self.running)
             response = str(self.ser.read_until(b"\n\r\n\n\n"))
+            print("srr", response)
             self.weight = float(re.findall(r'\d+\.\d+', response)[0])
 
     def read(self) -> float:
@@ -64,6 +65,8 @@ class scaleRead:
         self.read_t.join()
 
     def __del__(self):
+        if self.running:
+            self.stop()
         print("DEL")
         if not self._DEBUG:
             self.ser.close()
