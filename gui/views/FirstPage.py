@@ -3,6 +3,7 @@ import tkinter
 from tkinter import *
 from tkinter.ttk import Combobox
 from tkinter.messagebox import askyesno
+import os
 
 
 class FirstPage(object):
@@ -126,8 +127,8 @@ class FirstPage(object):
         self.combo4['state'] = 'readonly'
         # self.combo4['values'] = ['create new'] + self.pm.find_sub_dir(
         #     f"{self.pm.root_path}/{self.pm.latitude}/{self.pm.num1}/{self.pm.num2}")
-        self.combo4['values'] = self.pm.find_sub_dir(
-            f"{self.pm.root_path}/{self.pm.latitude}/{self.pm.num1}/{self.pm.num2}")
+        self.combo4['values'] = self.asts.api.get_context_list({'utm_hemisphere': 'N', 'utm_zone': self.pm.latitude, 'area_utm_easting_meters': self.pm.num1, 'area_utm_northing_meters': self.pm.num2})
+        print(self.combo4['values'], type(self.combo4['values']))
         return
 
     def comcmd4(self, a=None):
@@ -148,6 +149,8 @@ class FirstPage(object):
             self.asts.fc['combo4'] = self.combovar4.get()
         self.pm.context = self.combovar4.get()
         self.newPicButton['state'] = 'active'
+        if not os.path.exists(f"{self.pm.root_path}/{self.pm.latitude}/{self.pm.num1}/{self.pm.num2}/{self.pm.context}"):
+            os.mkdir(f"{self.pm.root_path}/{self.pm.latitude}/{self.pm.num1}/{self.pm.num2}/{self.pm.context}/finds/individual")
         return
 
     def clear(self):
@@ -159,7 +162,7 @@ class FirstPage(object):
             self.SurpriseColorUpdate()
             a = random.random()
             if a < 0.6:
-                self.newPicButton.place(x=100*random.random(), y=300*random.random() + 200)
+                self.newPicButton.place(x=100 * random.random(), y=300 * random.random() + 200)
                 return
         from .SecondPage import SecondPage
         self.clear()

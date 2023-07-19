@@ -4,9 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="8c8e226e-1aba-40fb-8616-283e480e391e" name="Changes" comment="login">
+    <list default="true" id="8c8e226e-1aba-40fb-8616-283e480e391e" name="Changes" comment="'create new context' disabled">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/API/API.py" beforeDir="false" afterPath="$PROJECT_DIR$/API/API.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/gui/views/FirstPage.py" beforeDir="false" afterPath="$PROJECT_DIR$/gui/views/FirstPage.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gui/views/LoginPage.py" beforeDir="false" afterPath="$PROJECT_DIR$/gui/views/LoginPage.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -90,7 +92,8 @@
       <workItem from="1689574061087" duration="7203000" />
       <workItem from="1689649179355" duration="842000" />
       <workItem from="1689650032139" duration="8112000" />
-      <workItem from="1689685926915" duration="9452000" />
+      <workItem from="1689685926915" duration="9501000" />
+      <workItem from="1689735018428" duration="1785000" />
     </task>
     <task id="LOCAL-00001" summary="GUI link with scaleReader">
       <created>1688709347263</created>
@@ -155,7 +158,14 @@
       <option name="project" value="LOCAL" />
       <updated>1689695238048</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="'create new context' disabled">
+      <created>1689696365801</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1689696365801</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -180,11 +190,12 @@
     <MESSAGE value="change retake buttons to (take, abort) alter buttons, add port selection and other functions" />
     <MESSAGE value="surprises! colors!" />
     <MESSAGE value="login" />
-    <option name="LAST_COMMIT_MESSAGE" value="login" />
+    <MESSAGE value="'create new context' disabled" />
+    <option name="LAST_COMMIT_MESSAGE" value="'create new context' disabled" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/APSAP_undergraduate_research$FirstPage.coverage" NAME="FirstPage Coverage Results" MODIFIED="1689692403935" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/gui/views" />
-    <SUITE FILE_PATH="coverage/APSAP_undergraduate_research$main.coverage" NAME="main Coverage Results" MODIFIED="1689696215440" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/APSAP_undergraduate_research$main.coverage" NAME="main Coverage Results" MODIFIED="1689736815458" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/APSAP_undergraduate_research$unimportant.coverage" NAME="unimportant Coverage Results" MODIFIED="1689692249184" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/gui/views" />
   </component>
 </project>
