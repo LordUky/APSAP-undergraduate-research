@@ -5,7 +5,7 @@ else
     mkdir build
 fi
 
-python3 -m compileall .
+python3 -m compileall -f .
 
 for x in `find -name "*.cpython-310.pyc" -type f`
 do

@@ -135,7 +135,7 @@ class cameraControl:
         # os.system("cd tmp; gphoto2 --capture-image-and-download --force-overwrite; cd ..; cp tmp/capt0001.cr3 {}")
         os.system(f"cd {self.tmp_dir} && gphoto2 --capture-image-and-download --force-overwrite && cd ..")
         # return jpeg path
-        return "tmp/capt0000.jpg"
+        return f"{self.tmp_dir}/capt0000.jpg"
     
     """
     'Download' the latest cr3 image to fp
@@ -144,7 +144,7 @@ class cameraControl:
         if self._DEBUG:
             os.system("cp cam_ctrl/aaa.jpg {}".format(fp))
             return
-        return os.system("cp tmp/capt0001.cr3 {}".format(fp))
+        return os.system(f"cp {self.tmp_dir}/capt0001.cr3 {fp}")
 
     # @staticmethod
     # def get_thumb(raw_fp):
