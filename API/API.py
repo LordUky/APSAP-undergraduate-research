@@ -57,25 +57,16 @@ class API:
         headers = {'Authorization': f'Token {self.token}'}
         context_list = []
         start_place = 0
-        api_url = self.base_url + "api/find/?limit=100"
-        while True:
-            response = self.session.get(api_url, headers= headers)
-            response_data = response.json()
-            for result in response_data["results"]:
-                if result['utm_hemisphere']== data['utm_hemisphere'] and \
-                result['utm_zone']== data['utm_zone'] and \
-                result['area_utm_easting_meters']== data['area_utm_easting_meters'] and \
-                result['area_utm_northing_meters']== data['area_utm_northing_meters'] and \
-                result['context_number'] not in context_list:
-                    context_list.append(result['context_number'])
-            # to next page/stop condition
-            if response_data['next'] == None:
-                break
-            else:
-                # next section
-                start_place += 100
-                api_url = self.base_url + "api/find/?limit=100" + f"&offset={start_place}"
-
+        api_url = self.base_url + "api/context/"
+        response = self.session.get(api_url, headers= headers)
+        response_data = response.json()
+        for result in response_data:
+            if result['utm_hemisphere']== data['utm_hemisphere'] and \
+            result['utm_zone']== data['utm_zone'] and \
+            result['area_utm_easting_meters']== data['area_utm_easting_meters'] and \
+            result['area_utm_northing_meters']== data['area_utm_northing_meters'] and \
+            result['context_number'] not in context_list:
+                context_list.append(result['context_number'])
         return context_list
 
     # post data into database
