@@ -61,6 +61,6 @@ class LoginPage(object):
             self.asts.surprise = bool(self.checkButtonIntVar.get())
             self.page.destroy()
             self.portSelected()
-            FirstPage(self.asts, self.pm.root_path, self.root)
+            FirstPage(self.asts, self.root)
         else:
             showinfo(title='Oops!', message='Login Failed!')

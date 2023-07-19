@@ -4,10 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="8c8e226e-1aba-40fb-8616-283e480e391e" name="Changes" comment="fix page number showing, fixed resize preview image">
+    <list default="true" id="8c8e226e-1aba-40fb-8616-283e480e391e" name="Changes" comment="added input url and root_path">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gui/views/FirstPage.py" beforeDir="false" afterPath="$PROJECT_DIR$/gui/views/FirstPage.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gui/views/FourthPage.py" beforeDir="false" afterPath="$PROJECT_DIR$/gui/views/FourthPage.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/gui/views/LoginPage.py" beforeDir="false" afterPath="$PROJECT_DIR$/gui/views/LoginPage.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gui/views/SecondPage.py" beforeDir="false" afterPath="$PROJECT_DIR$/gui/views/SecondPage.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gui/views/ThirdPage.py" beforeDir="false" afterPath="$PROJECT_DIR$/gui/views/ThirdPage.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -93,7 +96,7 @@
       <workItem from="1689650032139" duration="8112000" />
       <workItem from="1689685926915" duration="9501000" />
       <workItem from="1689735018428" duration="10657000" />
-      <workItem from="1689746491303" duration="821000" />
+      <workItem from="1689746491303" duration="2632000" />
     </task>
     <task id="LOCAL-00001" summary="GUI link with scaleReader">
       <created>1688709347263</created>
@@ -207,7 +210,14 @@
       <option name="project" value="LOCAL" />
       <updated>1689745705861</updated>
     </task>
-    <option name="localTasksCounter" value="17" />
+    <task id="LOCAL-00017" summary="added input url and root_path">
+      <created>1689747557217</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1689747557217</updated>
+    </task>
+    <option name="localTasksCounter" value="18" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -239,12 +249,13 @@
     <MESSAGE value="all done again except pic bug" />
     <MESSAGE value="fix page number showing, tried resize preview image" />
     <MESSAGE value="fix page number showing, fixed resize preview image" />
-    <option name="LAST_COMMIT_MESSAGE" value="fix page number showing, fixed resize preview image" />
+    <MESSAGE value="added input url and root_path" />
+    <option name="LAST_COMMIT_MESSAGE" value="added input url and root_path" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/APSAP_undergraduate_research$FirstPage.coverage" NAME="FirstPage Coverage Results" MODIFIED="1689738107596" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/gui/views" />
     <SUITE FILE_PATH="coverage/APSAP_undergraduate_research$ThirdPage.coverage" NAME="ThirdPage Coverage Results" MODIFIED="1689739574006" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/gui/views" />
-    <SUITE FILE_PATH="coverage/APSAP_undergraduate_research$main.coverage" NAME="main Coverage Results" MODIFIED="1689747316379" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/APSAP_undergraduate_research$main.coverage" NAME="main Coverage Results" MODIFIED="1689749208756" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/APSAP_undergraduate_research$unimportant.coverage" NAME="unimportant Coverage Results" MODIFIED="1689738863870" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/gui/views" />
   </component>
 </project>

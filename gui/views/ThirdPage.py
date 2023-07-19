@@ -11,14 +11,13 @@ import logging
 
 
 class ThirdPage(object):
-    def __init__(self, asts=None, rp=r"D:/ararat/data/files/N", r=None):
+    def __init__(self, asts=None, r=None):
         self.previewPicLabel = None
         self.previewLabel = None
         self.exitButton = None
         self.pm = asts.pm
         self.asts = asts
         self.cc = asts.cc
-        self.rootpath = rp
         self.root = r
 
         self.alterButton = None
@@ -77,7 +76,7 @@ class ThirdPage(object):
 
     def exitNotSaving(self):
         self.clear()
-        FirstPage(self.asts, self.rootpath, self.root)
+        FirstPage(self.asts, self.root)
 
     def take(self):
         if self.asts.surprise:
@@ -131,4 +130,4 @@ class ThirdPage(object):
 
         self.cc.copy_tmp_image_to_fp(fp)
 
-        FourthPage(fp_parent, asts=self.asts, rp=self.rootpath, r=self.root)
+        FourthPage(fp_parent, asts=self.asts, r=self.root)

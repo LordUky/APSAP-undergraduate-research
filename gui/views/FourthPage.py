@@ -9,7 +9,8 @@ import logging
 
 
 class FourthPage(object):
-    def __init__(self, fp_parent, asts=None, rp=r"D:/ararat/data/files/N", r=None):
+    def __init__(self, fp_parent, asts=None, r=None):
+        self.exitButton = None
         self.chooseMaterialLabel = None
         self.cbox = None
         self.weightLabel = None
@@ -23,7 +24,6 @@ class FourthPage(object):
         self.cc = asts.cc
         self.sr = asts.sr
         self.sr.start()
-        self.rootpath = rp
         self.root = r
         self.fp_parent = fp_parent
         self.asts.cp = 4
@@ -35,13 +35,17 @@ class FourthPage(object):
 
         self.createPage()
 
-        self.colorMembers = [self.root, self.sampleButton, self.sampleLabel, self.weightLabel, self.chooseMaterialLabel, self.uploadButton, self.materialLabel, self.categoryLabel]
+        self.colorMembers = [self.root, self.exitButton, self.sampleButton, self.sampleLabel, self.weightLabel, self.chooseMaterialLabel, self.uploadButton, self.materialLabel, self.categoryLabel]
 
     def createPage(self):
 
         fontStyle = tkFont.Font(family="Lucida Grande", size=30)
-        Label(self.root, text='Page4/4 (others_and_upload)', fg='white', bg='black', font=fontStyle).place(x=0,  y=550, width=600, height=50)
+        fontStyle2 = tkFont.Font(family="Lucida Grande", size=10)
 
+        Label(self.root, text='Page4/4 (others_and_upload)', fg='white', bg='black', font=fontStyle).place(x=0, y=550, width=600, height=50)
+
+        self.exitButton = Button(self.root, text='Exit (Not Saving)', command=self.exitNotSaving, bg=self.asts.bgColor if not self.asts.surprise else self.asts.getRandomColor(), fg='red', font=fontStyle2)
+        self.exitButton.place(x=300, y=500, width=200, height=40)
         self.sampleButton = Button(self.root, text='Sample', command=self.sample, bg=self.asts.bgColor if not self.asts.surprise else self.asts.getRandomColor(), activebackground='black', activeforeground='white')
         self.sampleButton.place(x=60, y=200, width=200, height=40)
         self.sampleLabel = Label(self.root, text='', bg=self.asts.bgColor if not self.asts.surprise else self.asts.getRandomColor())
@@ -52,6 +56,7 @@ class FourthPage(object):
         self.categoryLabel.place(x=600, y=400, width=200, height=40)
         self.weightLabel = Label(self.root, text='', name="weightLabel", bg='black' if not self.asts.surprise else self.asts.getRandomColor(), fg="white" if not self.asts.surprise else self.asts.getRandomColor())
         self.weightLabel.place(x=300, y=200, width=200, height=40)
+
         self.uploadButton = Button(self.root, text='CONFIRM AND UPLOAD', command=self.confirmAndUplaod, bg=self.asts.bgColor if not self.asts.surprise else self.asts.getRandomColor(), activebackground='blue', activeforeground='red', state='disabled')
         self.uploadButton.place(x=600, y=500, width=200, height=40)
 
@@ -71,10 +76,14 @@ class FourthPage(object):
         print(material_and_category)
         self.material = material_and_category[0]
         self.category = material_and_category[1]
-        self.materialLabel['text'] = 'material='+material_and_category[0]
-        self.categoryLabel['text'] = 'category='+material_and_category[1]
+        self.materialLabel['text'] = 'material=' + material_and_category[0]
+        self.categoryLabel['text'] = 'category=' + material_and_category[1]
 
         self.checkAllSet()
+
+    def exitNotSaving(self):
+        self.clear()
+        FirstPage(self.asts, self.root)
 
     def clear(self):
         for w in self.root.winfo_children():
@@ -100,7 +109,7 @@ class FourthPage(object):
                 return
 
         self.weight = self.sr.read()
-        self.sampleLabel['text'] = 'sample='+str(self.weight)
+        self.sampleLabel['text'] = 'sample=' + str(self.weight)
 
         self.checkAllSet()
 
@@ -124,12 +133,11 @@ class FourthPage(object):
         status = self.asts.api.create_find(data)
         if status:
             self.clear()
-            FirstPage(self.asts, self.rootpath, self.root)
+            FirstPage(self.asts, self.root)
         else:
             self.categoryLabel['text'] = 'UPLOAD FAILED!'
             self.materialLabel['text'] = 'UPLOAD FAILED!'
             self.sampleLabel['text'] = 'UPLOAD FAILED!'
-
 
     def checkAllSet(self):
         print(self.material, self.category, self.weight)

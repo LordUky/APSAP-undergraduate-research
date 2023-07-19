@@ -8,7 +8,7 @@ import os
 
 
 class FirstPage(object):
-    def __init__(self, asts=None, rp=r"D:/ararat/data/files/N", r=None):
+    def __init__(self, asts=None, r=None):
 
         self.PreviewPicLabel = None
         self.ContextNumberLabel = None
@@ -23,7 +23,6 @@ class FirstPage(object):
         self.pm = asts.pm
         self.asts = asts
         self.asts.cp = 1
-        self.rootpath = rp
 
         self.root = r  # r: Tk()
         self.root.geometry('%dx%d' % (1000, 600))
@@ -172,7 +171,7 @@ class FirstPage(object):
                 return
         from .SecondPage import SecondPage
         self.clear()
-        SecondPage(self.asts, self.rootpath, self.root)
+        SecondPage(self.asts, self.root)
 
     # def NewContext(self):
     #     if self.asts.surprise:

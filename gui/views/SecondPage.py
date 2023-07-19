@@ -10,7 +10,7 @@ import time
 
 
 class SecondPage(object):
-    def __init__(self, asts, rp=r"D:/ararat/data/files/N", r=None):
+    def __init__(self, asts, r=None):
         self.exitButton = None
         self.previewLabel = None
         self.previewPicLabel = None
@@ -18,7 +18,6 @@ class SecondPage(object):
         self.asts = asts
         self.asts.cp = 2
         self.cc = asts.cc
-        self.rootpath = rp
         self.root = r
 
         self.alterButton = None
@@ -77,7 +76,7 @@ class SecondPage(object):
 
     def exitNotSaving(self):
         self.clear()
-        FirstPage(self.asts, self.rootpath, self.root)
+        FirstPage(self.asts, self.root)
 
     def take(self):
         if self.asts.surprise:
@@ -125,4 +124,4 @@ class SecondPage(object):
 
         self.cc.copy_tmp_image_to_fp(new_dir + "/1.cr3")
 
-        ThirdPage(self.asts, self.rootpath, self.root)
+        ThirdPage(self.asts, self.root)
