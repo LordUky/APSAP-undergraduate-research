@@ -70,7 +70,19 @@ class API:
                     str(result['context_number']) not in list(map(str, context_list)):
                 context_list.append(result['context_number'])
         return context_list
-
+    
+    # function to get material and category combination
+    def get_combination(self):
+        combination = []
+        headers = {'Authorization': f'Token {self.token}'}
+        api_url = self.base_url + "api/find/mc/"
+        response = self.session.get(api_url, headers=headers)
+        response_data = response.json()
+        for result in response_data:
+            comb = result["material"] + " " + result["category"] 
+            combination.append(comb)
+        return combination
+    
     # post data into database
     def create_find(self, data: dict):
         headers = {'Authorization': f'Token {self.token}'}
@@ -114,5 +126,6 @@ if __name__ == "__main__":
     api.login(username=username, password=password)
     # max_num = api.get_max_find(data)
     # print(max_num)
-    api.create_find(data)
+    # api.create_find(data)
     # print(api.get_context_list(data))
+    print(api.get_combination())
