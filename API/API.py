@@ -50,8 +50,34 @@ class API:
                 start_place += 100
                 api_url = self.base_url + "api/find/?limit=100" + f"&offset={start_place}"
 
-        return max_num    
+        return max_num   
     
+    # only find the context with finds
+    def get_context_list(self,data:list):
+        headers = {'Authorization': f'Token {self.token}'}
+        context_list = []
+        start_place = 0
+        api_url = self.base_url + "api/find/?limit=100"
+        while True:
+            response = self.session.get(api_url, headers= headers)
+            response_data = response.json()
+            for result in response_data["results"]:
+                if result['utm_hemisphere']== data['utm_hemisphere'] and \
+                result['utm_zone']== data['utm_zone'] and \
+                result['area_utm_easting_meters']== data['area_utm_easting_meters'] and \
+                result['area_utm_northing_meters']== data['area_utm_northing_meters'] and \
+                result['context_number'] not in context_list:
+                    context_list.append(result['context_number'])
+            # to next page/stop condition
+            if response_data['next'] == None:
+                break
+            else:
+                # next section
+                start_place += 100
+                api_url = self.base_url + "api/find/?limit=100" + f"&offset={start_place}"
+
+        return context_list
+
     # post data into database
     def create_find(self,data:dict):
         headers = {'Authorization': f'Token {self.token}'}
@@ -80,7 +106,7 @@ if __name__ == "__main__":
         'utm_zone':38,
         'area_utm_easting_meters':478230,
         'area_utm_northing_meters':4419430,
-        'context_number':1,
+        'context_number':2,
         'material':'pottery', # user input
         'category':'rim' # user input
     }
@@ -90,6 +116,7 @@ if __name__ == "__main__":
 
     api = API(base_url)
     api.login(username = username,password = password)
-    max_num = api.get_max_find(data)
-    print(max_num)
+    # max_num = api.get_max_find(data)
+    # print(max_num)
     # api.create_find(data)
+    print(api.get_context_list(data))
