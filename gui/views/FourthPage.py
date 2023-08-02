@@ -118,7 +118,6 @@ class FourthPage(object):
         self.sr.stop()
         self.sr.write_to_file(self.weight, self.fp_parent + "/a.xlsx")
 
-        oneDecimalWeight = float('{:.1f}'.format(self.weight))
         data = {
             'utm_hemisphere': 'N',
             'utm_zone': int(self.pm.latitude),
@@ -127,7 +126,7 @@ class FourthPage(object):
             'context_number': int(self.pm.context),
             'material': self.material,  # user input
             'category': self.category,  # user input
-            'weight_grams': oneDecimalWeight,  # string/number with 1 decimal place
+            'weight_grams': self.weight,
             'volume_millimeter_cubed': None  # put none at collecting stage
         }
         status = self.asts.api.create_find(data)

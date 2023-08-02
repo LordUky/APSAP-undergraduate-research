@@ -6,11 +6,6 @@
   <component name="ChangeListManager">
     <list default="true" id="8c8e226e-1aba-40fb-8616-283e480e391e" name="Changes" comment="added input url and root_path">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gui/views/FirstPage.py" beforeDir="false" afterPath="$PROJECT_DIR$/gui/views/FirstPage.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gui/views/FourthPage.py" beforeDir="false" afterPath="$PROJECT_DIR$/gui/views/FourthPage.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gui/views/LoginPage.py" beforeDir="false" afterPath="$PROJECT_DIR$/gui/views/LoginPage.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gui/views/SecondPage.py" beforeDir="false" afterPath="$PROJECT_DIR$/gui/views/SecondPage.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gui/views/ThirdPage.py" beforeDir="false" afterPath="$PROJECT_DIR$/gui/views/ThirdPage.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -97,6 +92,8 @@
       <workItem from="1689685926915" duration="9501000" />
       <workItem from="1689735018428" duration="10657000" />
       <workItem from="1689746491303" duration="2632000" />
+      <workItem from="1689946660636" duration="17000" />
+      <workItem from="1689946682487" duration="600000" />
     </task>
     <task id="LOCAL-00001" summary="GUI link with scaleReader">
       <created>1688709347263</created>
